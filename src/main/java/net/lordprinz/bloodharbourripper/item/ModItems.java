@@ -13,6 +13,9 @@ public class ModItems {
     public static final RegistryObject<Item> BONE_SKEWER_SKELETON = ITEMS.register("bone_skewer_skeleton",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> JAULL_FISH_VIAL = ITEMS.register("jaull_fish_vial",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

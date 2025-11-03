@@ -18,6 +18,7 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("creativetab.blood_harbour_ripper_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.BONE_SKEWER_SKELETON.get());
+                        pOutput.accept(ModItems.JAULL_FISH_VIAL.get());
                     })
                     .build());
 
