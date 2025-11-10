@@ -3,6 +3,7 @@ package net.lordprinz.bloodharbourripper;
 import com.mojang.logging.LogUtils;
 import net.lordprinz.bloodharbourripper.item.ModCreativeModTabs;
 import net.lordprinz.bloodharbourripper.item.ModItems;
+import net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
@@ -69,6 +70,8 @@ public class BloodHarbourRipper
 
         ModItems.register(modEventBus);
 
+        ModEntityTypes.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -93,6 +96,12 @@ public class BloodHarbourRipper
         {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        }
+
+        @SubscribeEvent
+        public static void registerRenderers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER.get(),
+                    net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerRenderer::new);
         }
     }
 }
