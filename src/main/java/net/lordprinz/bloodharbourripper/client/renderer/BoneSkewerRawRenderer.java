@@ -26,12 +26,16 @@ public class BoneSkewerRawRenderer extends EntityRenderer<BoneSkewerRawEntity> {
     public void render(BoneSkewerRawEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
 
-        // Rotate to match flight direction
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() + 90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot() + 50.0F));
 
-        // Render the item
-        this.itemRenderer.renderStatic(entity.getSkewerItem(), ItemDisplayContext.GROUND, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
+        poseStack.scale(1.1F, 1.1F, 1.1F);
+
+        // Przesunięcie dla lepszego centrowania
+        poseStack.translate(0, 0, 0);
+
+        // Render the item - użyj FIXED dla lepszego wyglądu 3D
+        this.itemRenderer.renderStatic(entity.getSkewerItem(), ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
 
         poseStack.popPose();
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);

@@ -21,9 +21,9 @@ public class ModItems {
     public static final RegistryObject<Item> BONE_SKEWER_RAW = ITEMS.register("bone_skewer_raw",
             () -> new BoneSkewerRawItem(ModToolTiers.BONE_SKEWER_RAW, 4, -2.4f, new Item.Properties()));
 
-    // Netherite Sword + Sharpness V + 2 = 13 total damage (attack damage modifier = 9 bo base damage to 4)
+    // 15 total damage (attack damage modifier = 11 bo base damage to 4, więc 4 + 11 = 15)
     public static final RegistryObject<Item> BONE_SKEWER = ITEMS.register("bone_skewer",
-            () -> new BoneSkewerAdvancedItem(ModToolTiers.BONE_SKEWER_ADVANCED, 9, -2.4f, new Item.Properties()));
+            () -> new BoneSkewerAdvancedItem(ModToolTiers.BONE_SKEWER_ADVANCED, 11, -2.4f, new Item.Properties()));
 
     public static final RegistryObject<Item> JAULL_FISH_VIAL = ITEMS.register("jaull_fish_vial",
             () -> new Item(new Item.Properties()));

@@ -94,8 +94,8 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        // Damage jak z ręki: Netherite Sword (8) + Sharpness V (3) + 2 = 13
-        float f = 13.0F;
+        // Damage = 15 (zwiększony z 13)
+        float f = 15.0F;
         if (entity instanceof LivingEntity livingentity) {
             f += EnchantmentHelper.getDamageBonus(this.skewerItem, livingentity.getMobType());
         }

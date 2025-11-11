@@ -25,13 +25,14 @@ public class BoneSkewerAdvancedRenderer extends EntityRenderer<BoneSkewerAdvance
     @Override
     public void render(BoneSkewerAdvancedEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() + 90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot() + 50.0F));
 
-        // Rotate to match flight direction
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
+        poseStack.scale(1.1F, 1.1F, 1.1F);
 
-        // Render the item
-        this.itemRenderer.renderStatic(entity.getSkewerItem(), ItemDisplayContext.GROUND, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
+        poseStack.translate(0, 0, 0);
+
+        this.itemRenderer.renderStatic(entity.getSkewerItem(), ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
 
         poseStack.popPose();
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
@@ -39,7 +40,7 @@ public class BoneSkewerAdvancedRenderer extends EntityRenderer<BoneSkewerAdvance
 
     @Override
     public ResourceLocation getTextureLocation(BoneSkewerAdvancedEntity entity) {
-        return null; // Not needed as we render the item directly
+        return null;
     }
 }
 
