@@ -33,9 +33,12 @@ public class BoneSkewerSkeletonItem extends SwordItem {
                     skewer.forceReturn();
                     // Ustaw cooldown na bardzo długi czas - zostanie usunięty gdy harpun wróci
                     player.getCooldowns().addCooldown(this, 100000);
+                    // Odtwórz dźwięk powrotu/przywołania
+                    level.playSound(null, player.blockPosition(),
+                        net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RETURN.get(),
+                        SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
             }
-            level.playSound(null, player, SoundEvents.TRIDENT_RETURN, SoundSource.PLAYERS, 1.0F, 1.0F);
             return InteractionResultHolder.success(itemstack);
         }
 
@@ -62,7 +65,7 @@ public class BoneSkewerSkeletonItem extends SwordItem {
                     // Podstawowy rzut - jak fishing rod, mniejsza prędkość
                     skewer.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.0F, 1.5F);
                     level.addFreshEntity(skewer);
-                    level.playSound(null, skewer, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    level.playSound(null, skewer, net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RELEASE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
                     // Śledź rzucony harpun
                     BoneSkewerTracker.trackSkewer(player, skewer);

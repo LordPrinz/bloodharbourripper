@@ -25,8 +25,9 @@ public class BoneSkewerAdvancedRenderer extends EntityRenderer<BoneSkewerAdvance
     @Override
     public void render(BoneSkewerAdvancedEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
+
         poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() + 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot() + 50.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-entity.getXRot() + 45.0F));
 
         poseStack.scale(1.1F, 1.1F, 1.1F);
 

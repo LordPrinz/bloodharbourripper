@@ -27,13 +27,12 @@ public class BoneSkewerSkeletonRenderer extends EntityRenderer<BoneSkewerSkeleto
         poseStack.pushPose();
 
         poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() + 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot() + 50.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-entity.getXRot() + 45.0F));
 
         poseStack.scale(1.1F, 1.1F, 1.1F);
 
         poseStack.translate(0, 0, 0);
 
-        // Render the item - użyj FIXED dla lepszego wyglądu 3D
         this.itemRenderer.renderStatic(entity.getSkewerItem(), ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
 
         poseStack.popPose();
@@ -42,7 +41,7 @@ public class BoneSkewerSkeletonRenderer extends EntityRenderer<BoneSkewerSkeleto
 
     @Override
     public ResourceLocation getTextureLocation(BoneSkewerSkeletonEntity entity) {
-        return null; // Not needed as we render the item directly
+        return null;
     }
 }
 

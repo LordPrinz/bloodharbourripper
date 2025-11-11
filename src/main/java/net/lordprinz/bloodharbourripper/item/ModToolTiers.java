@@ -6,10 +6,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
 
 public class ModToolTiers {
-    // Tier for bone_skewer_skeleton (Iron level durability: 250)
     public static final Tier BONE_SKEWER_SKELETON = new ForgeTier(
             2,
-            250,  // Iron sword durability
+            250,
             6.0f,
             3.0f,
             14,
@@ -17,10 +16,9 @@ public class ModToolTiers {
             () -> Ingredient.EMPTY
     );
 
-    // Tier for bone_skewer_raw (Diamond level durability: 1561)
     public static final Tier BONE_SKEWER_RAW = new ForgeTier(
             3,
-            1561,  // Diamond sword durability
+            1561,
             8.0f,
             4.0f,
             10,
@@ -28,10 +26,9 @@ public class ModToolTiers {
             () -> Ingredient.EMPTY
     );
 
-    // Tier for bone_skewer (Netherite level durability: 2031)
     public static final Tier BONE_SKEWER_ADVANCED = new ForgeTier(
             4,
-            2031,  // Netherite sword durability
+            2031,
             9.0f,
             9.0f,
             15,

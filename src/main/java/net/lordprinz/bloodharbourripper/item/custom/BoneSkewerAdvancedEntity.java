@@ -72,9 +72,7 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
 
                 double d0 = 0.05 * (double) i;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95).add(vec3.normalize().scale(d0)));
-                if (this.clientSideReturnTridentTickCount == 0) {
-                    this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
-                }
+                // Dźwięk powrotu usunięty - tylko custom dźwięki
                 ++this.clientSideReturnTridentTickCount;
             }
         }
@@ -103,7 +101,7 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
         Entity owner = this.getOwner();
         DamageSource damagesource = owner != null ? this.damageSources().mobAttack((LivingEntity) owner) : this.damageSources().generic();
         this.dealtDamage = true;
-        SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
+        SoundEvent soundevent = net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_HIT.get(); // Custom dźwięk trafienia
         if (entity.hurt(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
@@ -119,7 +117,7 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
                 // Aplikuj Slowness II na 4 sekundy (80 ticków)
                 livingentity1.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 1));
                 // Aplikuj Wither na 32 sekundy (640 ticków - 8x dłużej)
-                livingentity1.addEffect(new MobEffectInstance(MobEffects.WITHER, 640, 0));
+                livingentity1.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, 0));
 
                 // Przyciąganie do gracza - najsilniejsze
                 if (owner != null && !this.level().isClientSide) {
@@ -152,7 +150,15 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
 
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.TRIDENT_HIT_GROUND;
+        // Custom dźwięk powrotu/uderzenia w ziemię
+        return net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RETURN.get();
+    }
+
+    @Override
+    protected void onHitBlock(net.minecraft.world.phys.BlockHitResult result) {
+        super.onHitBlock(result);
+        // Odtwórz dźwięk BONE_SKEWER_RETURN gdy harpun uderza w blok (hybienie)
+        this.playSound(net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RETURN.get(), 1.0F, 1.0F);
     }
 
     @Override
@@ -160,6 +166,7 @@ public class BoneSkewerAdvancedEntity extends AbstractArrow {
         // Jeśli harpun wraca (jest w trybie NoPhysics) i należy do gracza
         if (this.ownedBy(player) && this.isNoPhysics()) {
             if (!this.level().isClientSide) {
+
                 // Usuń śledzenie gdy harpun wraca
                 BoneSkewerTracker.removeSkewer(player);
                 // Usuń cooldown - gracz może znowu użyć harpuna

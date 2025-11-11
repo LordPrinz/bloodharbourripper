@@ -18,7 +18,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = "bloodharbourripper", value = Dist.CLIENT)
 public class KeyInputHandler {
     private static boolean wasPressed = false;
-    private static final double EXECUTE_RANGE = 12.0; // Taki sam zasięg jak podświetlanie
+    private static final double EXECUTE_RANGE = 12.0;
     private static long currentTick = 0;
 
     @SubscribeEvent
@@ -26,30 +26,25 @@ public class KeyInputHandler {
         if (event.phase == TickEvent.Phase.END) {
             currentTick++;
 
-            // Tickuj markery egzekucji
             ExecuteMarkerRenderer.tickMarkers();
 
             Minecraft mc = Minecraft.getInstance();
 
             if (mc.player == null || mc.level == null) return;
 
-            // Sprawdź czy klawisz C jest wciśnięty
             boolean isPressed = KeyBindings.EXECUTE_KEY.isDown();
 
-            // Wykryj naciśnięcie (edge detection)
             if (isPressed && !wasPressed) {
                 Player player = mc.player;
 
-                // Sprawdź czy gracz trzyma BONE_SKEWER (najlepszy harpun) i SHIFT
                 if (player.getMainHandItem().getItem() == ModItems.BONE_SKEWER.get() && player.isShiftKeyDown()) {
 
-                    // Sprawdź cooldown
                     if (!ExecuteCooldownTracker.canExecute(player.getUUID(), currentTick)) {
                         long remainingTicks = ExecuteCooldownTracker.getRemainingCooldown(player.getUUID(), currentTick);
                         double remainingSeconds = remainingTicks / 20.0;
                         player.displayClientMessage(
                             Component.literal(String.format("§cExecute on cooldown: %.1fs", remainingSeconds)),
-                            true // actionbar
+                            true
                         );
                         wasPressed = isPressed;
                         return;
@@ -66,11 +61,9 @@ public class KeyInputHandler {
                     for (LivingEntity target : nearbyEntities) {
                         double distance = player.distanceTo(target);
 
-                        // Sprawdź czy mob spełnia warunki
                         if (distance <= EXECUTE_RANGE) {
                             float healthPercentage = target.getHealth() / target.getMaxHealth();
 
-                            // Znajdź najbliższego moba z <33% HP
                             if (healthPercentage < 0.33f && distance < closestDistance) {
                                 closestTarget = target;
                                 closestDistance = distance;
@@ -78,26 +71,21 @@ public class KeyInputHandler {
                         }
                     }
 
-                    // Jeśli znaleziono cel, wykonaj egzekucję
                     if (closestTarget != null) {
-                        // Dodaj wizualny marker X pod mobem (13 ticków = 0.65 sekundy)
                         ExecuteMarkerRenderer.addExecutionMarker(closestTarget.getUUID(), 13);
 
                         ModNetworking.sendToServer(new ExecuteEntityPacket(closestTarget.getId()));
 
-                        // Zarejestruj wykonanie egzekucji i rozpocznij cooldown
                         ExecuteCooldownTracker.markExecuted(player.getUUID(), currentTick);
 
-                        // Pokaż wiadomość o egzekucji
                         player.displayClientMessage(
-                            Component.literal("§6⚔ EXECUTING..."),
-                            true // actionbar
+                            Component.literal("§6⚔ DEATH FROM BELOW..."),
+                            true
                         );
                     } else {
-                        // Brak celu do egzekucji
                         player.displayClientMessage(
                             Component.literal("§cNo valid target for execution!"),
-                            true // actionbar
+                            true
                         );
                     }
                 }

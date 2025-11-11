@@ -7,6 +7,42 @@
         "stream": false
       }
     ]
+  },
+  "bone_skewer_charging": {
+    "subtitle": "bloodharbourripper.bone_skewer_charging",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:bone_skewer_charging",
+        "stream": false
+      }
+    ]
+  },
+  "bone_skewer_release": {
+    "subtitle": "bloodharbourripper.bone_skewer_release",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:bone_skewer_release",
+        "stream": false
+      }
+    ]
+  },
+  "bone_skewer_hit": {
+    "subtitle": "bloodharbourripper.bone_skewer_hit",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:bone_skewer_hit",
+        "stream": false
+      }
+    ]
+  },
+  "bone_skewer_return": {
+    "subtitle": "bloodharbourripper.bone_skewer_return",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:bone_skewer_return",
+        "stream": false
+      }
+    ]
   }
 }
 
