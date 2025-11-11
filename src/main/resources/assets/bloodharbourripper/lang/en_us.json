@@ -1,6 +1,11 @@
 {
   "item.bloodharbourripper.bone_skewer_skeleton": "Bone Skewer Skeleton",
+  "item.bloodharbourripper.bone_skewer_raw": "Bone Skewer Raw",
+  "item.bloodharbourripper.bone_skewer": "Bone Skewer",
   "item.bloodharbourripper.jaull_fish_vial": "Jaull Fish Vial",
 
-  "creativetab.blood_harbour_ripper_tab": "Blood Harbour Ripper Tab"
+  "creativetab.blood_harbour_ripper_tab": "Blood Harbour Ripper Tab",
+
+  "key.categories.bloodharbourripper": "Blood Harbour Ripper",
+  "key.bloodharbourripper.execute": "Execute Low HP Enemy"
 }

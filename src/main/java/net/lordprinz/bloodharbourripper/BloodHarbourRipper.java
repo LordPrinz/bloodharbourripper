@@ -72,6 +72,8 @@ public class BloodHarbourRipper
 
         ModEntityTypes.register(modEventBus);
 
+        net.lordprinz.bloodharbourripper.sound.ModSounds.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -81,7 +83,11 @@ public class BloodHarbourRipper
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {}
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            net.lordprinz.bloodharbourripper.network.ModNetworking.register();
+        });
+    }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {}
 
@@ -99,9 +105,18 @@ public class BloodHarbourRipper
         }
 
         @SubscribeEvent
+        public static void onKeyRegister(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
+            event.register(net.lordprinz.bloodharbourripper.client.KeyBindings.EXECUTE_KEY);
+        }
+
+        @SubscribeEvent
         public static void registerRenderers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER.get(),
-                    net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerRenderer::new);
+            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER_SKELETON.get(),
+                    net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerSkeletonRenderer::new);
+            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER_RAW.get(),
+                    net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerRawRenderer::new);
+            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER_ADVANCED.get(),
+                    net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerAdvancedRenderer::new);
         }
     }
 }

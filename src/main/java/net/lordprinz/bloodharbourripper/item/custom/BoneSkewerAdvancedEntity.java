@@ -9,6 +9,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,22 +22,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class BoneSkewerEntity extends AbstractArrow {
-    private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(BoneSkewerEntity.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(BoneSkewerEntity.class, EntityDataSerializers.BOOLEAN);
-    private ItemStack tridentItem = new ItemStack(ModItems.BONE_SKEWER_SKELETON.get());
+public class BoneSkewerAdvancedEntity extends AbstractArrow {
+    private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(BoneSkewerAdvancedEntity.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(BoneSkewerAdvancedEntity.class, EntityDataSerializers.BOOLEAN);
+    private ItemStack skewerItem = new ItemStack(ModItems.BONE_SKEWER.get());
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
 
-    public BoneSkewerEntity(EntityType<? extends BoneSkewerEntity> entityType, Level level) {
+    public BoneSkewerAdvancedEntity(EntityType<? extends BoneSkewerAdvancedEntity> entityType, Level level) {
         super(entityType, level);
     }
 
-    public BoneSkewerEntity(Level level, LivingEntity shooter, ItemStack stack) {
-        super(ModEntityTypes.BONE_SKEWER.get(), shooter, level);
-        this.tridentItem = stack.copy();
-        this.entityData.set(ID_LOYALTY, (byte) 3); // Loyalty 3 - broń wraca po trafieniu
+    public BoneSkewerAdvancedEntity(Level level, LivingEntity shooter, ItemStack stack) {
+        super(ModEntityTypes.BONE_SKEWER_ADVANCED.get(), shooter, level);
+        this.skewerItem = stack.copy();
+        this.entityData.set(ID_LOYALTY, (byte) 3);
         this.entityData.set(ID_FOIL, stack.hasFoil());
+        this.pickup = AbstractArrow.Pickup.CREATIVE_ONLY; // Nie pozwalaj na normalne podnoszenie
     }
 
     @Override
@@ -58,7 +61,6 @@ public class BoneSkewerEntity extends AbstractArrow {
                 if (!this.level().isClientSide && this.pickup == AbstractArrow.Pickup.ALLOWED) {
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
-
                 this.discard();
             } else {
                 this.setNoPhysics(true);
@@ -73,7 +75,6 @@ public class BoneSkewerEntity extends AbstractArrow {
                 if (this.clientSideReturnTridentTickCount == 0) {
                     this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
                 }
-
                 ++this.clientSideReturnTridentTickCount;
             }
         }
@@ -93,13 +94,14 @@ public class BoneSkewerEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        float f = 8.0F; // Damage amount
+        // Damage jak z ręki: Netherite Sword (8) + Sharpness V (3) + 2 = 13
+        float f = 13.0F;
         if (entity instanceof LivingEntity livingentity) {
-            f += EnchantmentHelper.getDamageBonus(this.tridentItem, livingentity.getMobType());
+            f += EnchantmentHelper.getDamageBonus(this.skewerItem, livingentity.getMobType());
         }
 
         Entity owner = this.getOwner();
-        DamageSource damagesource = this.damageSources().trident(this, (Entity) (owner == null ? this : owner));
+        DamageSource damagesource = owner != null ? this.damageSources().mobAttack((LivingEntity) owner) : this.damageSources().generic();
         this.dealtDamage = true;
         SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
         if (entity.hurt(damagesource, f)) {
@@ -112,35 +114,40 @@ public class BoneSkewerEntity extends AbstractArrow {
                     EnchantmentHelper.doPostHurtEffects(livingentity1, owner);
                     EnchantmentHelper.doPostDamageEffects((LivingEntity) owner, livingentity1);
                 }
-
                 this.doPostHurtEffects(livingentity1);
 
-                // Przyciąganie przeciwnika do gracza - 30% odległości
+                // Aplikuj Slowness II na 4 sekundy (80 ticków)
+                livingentity1.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 1));
+                // Aplikuj Wither na 32 sekundy (640 ticków - 8x dłużej)
+                livingentity1.addEffect(new MobEffectInstance(MobEffects.WITHER, 640, 0));
+
+                // Przyciąganie do gracza - najsilniejsze
                 if (owner != null && !this.level().isClientSide) {
                     Vec3 ownerPos = owner.position();
                     Vec3 entityPos = entity.position();
                     double distance = ownerPos.distanceTo(entityPos);
                     Vec3 direction = ownerPos.subtract(entityPos).normalize();
-                    double pullStrength = distance * 0.3; // 30% odległości między graczem a mobem
-                    entity.setDeltaMovement(entity.getDeltaMovement().add(direction.scale(pullStrength)));
+                    // Najsilniejsze przyciąganie - mob prawie ląduje na graczu
+                    double pullStrength = Math.min(distance * 0.5, 3.0); // 50% dystansu, max 3.0
+                    entity.setDeltaMovement(direction.scale(pullStrength));
                     entity.hurtMarked = true;
                 }
             }
         }
 
         this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
-        float f1 = 1.0F;
-        this.playSound(soundevent, f1, 1.0F);
+        this.playSound(soundevent, 1.0F, 1.0F);
     }
 
     @Override
     protected ItemStack getPickupItem() {
-        return this.tridentItem.copy();
+        return this.skewerItem.copy();
     }
 
     @Override
     protected boolean tryPickup(Player player) {
-        return super.tryPickup(player) || this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
+        // Nie pozwalaj na normalne podnoszenie - harpun może tylko wrócić sam
+        return false;
     }
 
     @Override
@@ -150,26 +157,34 @@ public class BoneSkewerEntity extends AbstractArrow {
 
     @Override
     public void playerTouch(Player player) {
-        if (this.ownedBy(player) || this.getOwner() == null) {
-            super.playerTouch(player);
+        // Jeśli harpun wraca (jest w trybie NoPhysics) i należy do gracza
+        if (this.ownedBy(player) && this.isNoPhysics()) {
+            if (!this.level().isClientSide) {
+                // Usuń śledzenie gdy harpun wraca
+                BoneSkewerTracker.removeSkewer(player);
+                // Usuń cooldown - gracz może znowu użyć harpuna
+                player.getCooldowns().removeCooldown(ModItems.BONE_SKEWER.get());
+                // Usuń encję harpuna (nie dodawaj do ekwipunku - item już tam jest)
+                this.discard();
+            }
         }
+        // Nie wywołuj super.playerTouch() - zapobiega to podnoszeniu
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        if (compound.contains("Trident", 10)) {
-            this.tridentItem = ItemStack.of(compound.getCompound("Trident"));
+        if (compound.contains("Skewer", 10)) {
+            this.skewerItem = ItemStack.of(compound.getCompound("Skewer"));
         }
-
         this.dealtDamage = compound.getBoolean("DealtDamage");
-        this.entityData.set(ID_LOYALTY, (byte) 3); // Loyalty 3 - broń wraca
+        this.entityData.set(ID_LOYALTY, (byte) 3);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.put("Trident", this.tridentItem.save(new CompoundTag()));
+        compound.put("Skewer", this.skewerItem.save(new CompoundTag()));
         compound.putBoolean("DealtDamage", this.dealtDamage);
     }
 
@@ -183,6 +198,18 @@ public class BoneSkewerEntity extends AbstractArrow {
 
     public boolean isFoil() {
         return this.entityData.get(ID_FOIL);
+    }
+
+    public ItemStack getSkewerItem() {
+        return this.skewerItem;
+    }
+
+    // Metoda do wymuszenia powrotu harpuna
+    public void forceReturn() {
+        this.dealtDamage = true;
+        this.setNoPhysics(true);
+        // Natychmiast zatrzymaj harpun, aby w następnym ticku zaczął wracać
+        this.setDeltaMovement(Vec3.ZERO);
     }
 }
 

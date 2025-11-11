@@ -14,10 +14,12 @@ public class ModCreativeModTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BloodHarbourRipper.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> BLOOD_HARBOUR_RIPPER_TAB = CREATIVE_MODE_TABS.register("blood_harbour_ripper_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack((ModItems.BONE_SKEWER_SKELETON.get())))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack((ModItems.BONE_SKEWER.get())))
                     .title(Component.translatable("creativetab.blood_harbour_ripper_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.BONE_SKEWER_SKELETON.get());
+                        pOutput.accept(ModItems.BONE_SKEWER_RAW.get());
+                        pOutput.accept(ModItems.BONE_SKEWER.get());
                         pOutput.accept(ModItems.JAULL_FISH_VIAL.get());
                     })
                     .build());

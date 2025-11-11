@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "JJJ",
+    "JSJ",
+    "JJJ"
+  ],
+  "key": {
+    "S": {
+      "item": "bloodharbourripper:bone_skewer_raw"
+    },
+    "J": {
+      "item": "bloodharbourripper:jaull_fish_vial"
+    }
+  },
+  "result": {
+    "item": "bloodharbourripper:bone_skewer",
+    "count": 1
+  },
+  "show_notification": true
+}
+
+

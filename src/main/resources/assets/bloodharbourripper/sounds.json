@@ -1,0 +1,12 @@
+{
+  "execute": {
+    "subtitle": "bloodharbourripper.execute",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:execute",
+        "stream": false
+      }
+    ]
+  }
+}
+
