@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 public class DashPhantomRenderer extends EntityRenderer<DashPhantomEntity> {
@@ -56,15 +55,23 @@ public class DashPhantomRenderer extends EntityRenderer<DashPhantomEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(DashPhantomEntity entity) {
-        if (Minecraft.getInstance().level != null) {
-            java.util.UUID ownerUUID = entity.getOwnerUUID();
-            if (ownerUUID != null) {
-                Player clientPlayer = Minecraft.getInstance().level.getPlayerByUUID(ownerUUID);
-                if (clientPlayer instanceof AbstractClientPlayer abstractClientPlayer) {
-                    return abstractClientPlayer.getSkinTextureLocation();
+        Minecraft mc = Minecraft.getInstance();
+        java.util.UUID ownerUUID = entity.getOwnerUUID();
+
+        if (ownerUUID != null) {
+            if (mc.player != null && mc.player.getUUID().equals(ownerUUID)) {
+                return mc.player.getSkinTextureLocation();
+            }
+
+            if (mc.level != null) {
+                for (Player player : mc.level.players()) {
+                    if (player.getUUID().equals(ownerUUID) && player instanceof AbstractClientPlayer abstractClientPlayer) {
+                        return abstractClientPlayer.getSkinTextureLocation();
+                    }
                 }
             }
         }
+
         return ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png");
     }
 }

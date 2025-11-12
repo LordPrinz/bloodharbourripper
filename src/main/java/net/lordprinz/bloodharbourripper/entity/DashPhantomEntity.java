@@ -43,6 +43,7 @@ public class DashPhantomEntity extends Entity {
         this.setOwner(owner);
     }
 
+
     @Override
     protected void defineSynchedData() {
         this.entityData.define(OWNER_UUID, java.util.Optional.empty());
