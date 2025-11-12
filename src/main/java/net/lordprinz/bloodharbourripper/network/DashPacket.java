@@ -57,12 +57,14 @@ public class DashPacket {
                 net.lordprinz.bloodharbourripper.sound.ModSounds.DASH_SOUND.get(),
                 net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 1.0F);
 
+        Vec3 phantomPos = startPos.subtract(direction.scale(1.5));
+
         net.lordprinz.bloodharbourripper.entity.DashPhantomEntity phantom =
                 new net.lordprinz.bloodharbourripper.entity.DashPhantomEntity(level, player);
-        phantom.setPos(startPos);
+        phantom.setPos(phantomPos);
         level.addFreshEntity(phantom);
 
-        Vec3 dashVelocity = direction.scale(1.8);
+        Vec3 dashVelocity = direction.scale(3.6);
         player.setDeltaMovement(dashVelocity.x, dashVelocity.y * 0.5, dashVelocity.z);
         player.hurtMarked = true;
 

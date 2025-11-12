@@ -23,6 +23,33 @@ public class KeyInputHandler {
     private static final double EXECUTE_RANGE = 12.0;
     private static long currentTick = 0;
 
+    private static boolean isAlly(Player player, LivingEntity target) {
+        if (target instanceof Player targetPlayer) {
+            if (player.getTeam() != null && player.getTeam().equals(targetPlayer.getTeam())) {
+                return true;
+            }
+        }
+
+        if (target instanceof net.minecraft.world.entity.TamableAnimal tamable) {
+            if (tamable.isTame() && tamable.getOwner() != null) {
+                if (tamable.getOwner().equals(player)) {
+                    return true;
+                }
+                if (player.getTeam() != null && tamable.getOwner() instanceof Player owner) {
+                    if (player.getTeam().equals(owner.getTeam())) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (player.getTeam() != null && target.getTeam() != null) {
+            return player.getTeam().equals(target.getTeam());
+        }
+
+        return false;
+    }
+
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
@@ -45,7 +72,7 @@ public class KeyInputHandler {
                         long remainingTicks = ExecuteCooldownTracker.getRemainingCooldown(player.getUUID(), currentTick);
                         double remainingSeconds = remainingTicks / 20.0;
                         player.displayClientMessage(
-                            Component.literal(String.format("§Death from below on cooldown: %.1fs", remainingSeconds)),
+                            Component.literal(String.format("§cDeath from below on cooldown: %.1fs", remainingSeconds)),
                             true
                         );
                         wasPressed = isPressed;
@@ -62,7 +89,7 @@ public class KeyInputHandler {
                     for (LivingEntity target : nearbyEntities) {
                         double distance = player.distanceTo(target);
 
-                        if (distance <= EXECUTE_RANGE) {
+                        if (distance <= EXECUTE_RANGE && !isAlly(player, target)) {
                             float healthPercentage = target.getHealth() / target.getMaxHealth();
 
                             if (healthPercentage < 0.33f && distance < closestDistance) {
@@ -97,6 +124,15 @@ public class KeyInputHandler {
             boolean isDashPressed = KeyBindings.DASH_KEY.isDown();
 
             if (isDashPressed && !wasDashPressed && player.isShiftKeyDown()) {
+                if (player.getMainHandItem().getItem() != ModItems.BONE_SKEWER.get()) {
+                    player.displayClientMessage(
+                        Component.literal("§cYou need to hold Bone Skewer to use Phantom Undertow!"),
+                        true
+                    );
+                    wasDashPressed = isDashPressed;
+                    return;
+                }
+
                 long gameTime = mc.level.getGameTime();
                 long remainingCooldown = DashPacket.getRemainingCooldown(player.getUUID(), gameTime);
 

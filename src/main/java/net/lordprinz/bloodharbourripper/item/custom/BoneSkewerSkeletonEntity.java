@@ -81,7 +81,16 @@ public class BoneSkewerSkeletonEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        // Damage = Iron Sword (6) + 1 = 7
+
+        if (entity instanceof LivingEntity livingTarget) {
+            if (livingTarget.isBlocking()) {
+                livingTarget.stopUsingItem();
+                if (livingTarget instanceof Player playerTarget) {
+                    playerTarget.getCooldowns().addCooldown(livingTarget.getUseItem().getItem(), 100);
+                }
+            }
+        }
+
         float f = 7.0F;
         if (entity instanceof LivingEntity livingentity) {
             f += EnchantmentHelper.getDamageBonus(this.skewerItem, livingentity.getMobType());
@@ -89,7 +98,7 @@ public class BoneSkewerSkeletonEntity extends AbstractArrow {
         Entity owner = this.getOwner();
         DamageSource damagesource = owner != null ? this.damageSources().mobAttack((LivingEntity) owner) : this.damageSources().generic();
         this.dealtDamage = true;
-        SoundEvent soundevent = net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_HIT.get(); // Custom dźwięk trafienia
+        SoundEvent soundevent = net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_HIT.get();
         if (entity.hurt(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;

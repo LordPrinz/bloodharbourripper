@@ -30,7 +30,7 @@ public class ModToolTiers {
             4,
             2031,
             9.0f,
-            9.0f,
+            6.0f,
             15,
             BlockTags.NEEDS_DIAMOND_TOOL,
             () -> Ingredient.EMPTY

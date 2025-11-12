@@ -92,6 +92,18 @@ public class BoneSkewerRawEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
+
+        // Wyłącz tarczę jeśli cel blokuje
+        if (entity instanceof LivingEntity livingTarget) {
+            if (livingTarget.isBlocking()) {
+                livingTarget.stopUsingItem();
+                // Dodaj cooldown tylko dla graczy
+                if (livingTarget instanceof Player playerTarget) {
+                    playerTarget.getCooldowns().addCooldown(livingTarget.getUseItem().getItem(), 100);
+                }
+            }
+        }
+
         // Damage jak z ręki: Diamond Sword (7) + 1 = 8
         float f = 8.0F;
         if (entity instanceof LivingEntity livingentity) {
@@ -101,7 +113,7 @@ public class BoneSkewerRawEntity extends AbstractArrow {
         Entity owner = this.getOwner();
         DamageSource damagesource = owner != null ? this.damageSources().mobAttack((LivingEntity) owner) : this.damageSources().generic();
         this.dealtDamage = true;
-        SoundEvent soundevent = net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_HIT.get(); // Custom dźwięk trafienia
+        SoundEvent soundevent = net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_HIT.get();
         if (entity.hurt(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;

@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class DashPhantomEntity extends Entity {
-    private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(DashPhantomEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<java.util.Optional<UUID>> OWNER_UUID = SynchedEntityData.defineId(DashPhantomEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final int WAIT_TICKS = 12;
     private static final float DASH_DAMAGE = 8.0f;
     private static final double RETURN_SPEED = 2.0;
@@ -45,17 +45,23 @@ public class DashPhantomEntity extends Entity {
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(OWNER_ID, -1);
+        this.entityData.define(OWNER_UUID, java.util.Optional.empty());
     }
 
     public void setOwner(ServerPlayer owner) {
-        this.entityData.set(OWNER_ID, owner.getId());
+        this.entityData.set(OWNER_UUID, java.util.Optional.of(owner.getUUID()));
+    }
+
+    public UUID getOwnerUUID() {
+        return this.entityData.get(OWNER_UUID).orElse(null);
     }
 
     public ServerPlayer getOwner() {
+        UUID ownerUUID = getOwnerUUID();
+        if (ownerUUID == null) return null;
+
         if (this.level() instanceof ServerLevel serverLevel) {
-            int ownerId = this.entityData.get(OWNER_ID);
-            Entity entity = serverLevel.getEntity(ownerId);
+            Entity entity = serverLevel.getPlayerByUUID(ownerUUID);
             if (entity instanceof ServerPlayer player) {
                 return player;
             }

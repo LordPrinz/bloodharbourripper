@@ -26,17 +26,28 @@ public class DashPhantomRenderer extends EntityRenderer<DashPhantomEntity> {
 
     @Override
     public void render(DashPhantomEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        ServerPlayer owner = entity.getOwner();
-        if (owner == null) return;
-
         poseStack.pushPose();
 
+        poseStack.translate(-0.5, 0.5, 0);
+        poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
         poseStack.scale(0.9f, 0.9f, 0.9f);
-        poseStack.translate(0, -1.5, 0);
+
+        this.playerModel.young = false;
+        this.playerModel.crouching = false;
+        this.playerModel.attackTime = 0.0F;
+
+        this.playerModel.head.xRot = 0.0F;
+        this.playerModel.head.yRot = 0.0F;
+        this.playerModel.body.xRot = 0.0F;
+        this.playerModel.body.yRot = 0.0F;
+        this.playerModel.rightArm.xRot = 0.0F;
+        this.playerModel.leftArm.xRot = 0.0F;
+        this.playerModel.rightLeg.xRot = 0.0F;
+        this.playerModel.leftLeg.xRot = 0.0F;
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(entity)));
 
-        this.playerModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.4F);
+        this.playerModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.3F);
 
         poseStack.popPose();
 
@@ -45,14 +56,16 @@ public class DashPhantomRenderer extends EntityRenderer<DashPhantomEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(DashPhantomEntity entity) {
-        ServerPlayer owner = entity.getOwner();
-        if (owner != null && Minecraft.getInstance().level != null) {
-            Player clientPlayer = Minecraft.getInstance().level.getPlayerByUUID(owner.getUUID());
-            if (clientPlayer instanceof AbstractClientPlayer abstractClientPlayer) {
-                return abstractClientPlayer.getSkinTextureLocation();
+        if (Minecraft.getInstance().level != null) {
+            java.util.UUID ownerUUID = entity.getOwnerUUID();
+            if (ownerUUID != null) {
+                Player clientPlayer = Minecraft.getInstance().level.getPlayerByUUID(ownerUUID);
+                if (clientPlayer instanceof AbstractClientPlayer abstractClientPlayer) {
+                    return abstractClientPlayer.getSkinTextureLocation();
+                }
             }
         }
-        return ResourceLocation.withDefaultNamespace("textures/entity/steve.png");
+        return ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png");
     }
 }
 
