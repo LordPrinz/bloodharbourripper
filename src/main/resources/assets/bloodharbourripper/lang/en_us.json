@@ -1,11 +1,17 @@
 {
   "item.bloodharbourripper.bone_skewer_skeleton": "Bone Skewer Skeleton",
+  "item.bloodharbourripper.bone_skewer_skeleton.desc": "Basic throwable harpoon. Can be recalled.",
   "item.bloodharbourripper.bone_skewer_raw": "Bone Skewer Raw",
+  "item.bloodharbourripper.bone_skewer_raw.desc": "Enhanced harpoon. Inflicts Slowness II on hit.",
   "item.bloodharbourripper.bone_skewer": "Bone Skewer",
+  "item.bloodharbourripper.bone_skewer.desc": "Powerful harpoon. Inflicts Slowness II and Wither. Can execute low HP enemies with Shift+C.",
   "item.bloodharbourripper.jaull_fish_vial": "Jaull Fish Vial",
+  "item.bloodharbourripper.jaull_fish_vial.desc": "Mysterious vial found in Ancient Cities. Used to craft powerful weapons.",
 
   "creativetab.blood_harbour_ripper_tab": "Blood Harbour Ripper Tab",
 
   "key.categories.bloodharbourripper": "Blood Harbour Ripper",
-  "key.bloodharbourripper.execute": "Execute Low HP Enemy"
+  "key.bloodharbourripper.execute": "Death From Below",
+
+  "tooltip.bloodharbourripper.modname": "Blood Harbour Ripper"
 }

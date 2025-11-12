@@ -50,7 +50,6 @@ public class KeyInputHandler {
                         return;
                     }
 
-                    // Znajdź najbliższego moba z <33% HP w zasięgu
                     AABB searchBox = player.getBoundingBox().inflate(EXECUTE_RANGE);
                     List<LivingEntity> nearbyEntities = mc.level.getEntitiesOfClass(LivingEntity.class, searchBox,
                         e -> e != player && e.isAlive());

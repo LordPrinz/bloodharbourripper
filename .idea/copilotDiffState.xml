@@ -21,6 +21,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/assets/bloodharbourripper/lang/en_us.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/resources/assets/bloodharbourripper/lang/en_us.json" />
+              <option name="originalContent" value="{&#10;  &quot;item.bloodharbourripper.bone_skewer_skeleton&quot;: &quot;Bone Skewer Skeleton&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_skeleton.desc&quot;: &quot;Basic throwable harpoon. Can be recalled.&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_raw&quot;: &quot;Bone Skewer Raw&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_raw.desc&quot;: &quot;Enhanced harpoon. Inflicts Slowness II on hit.&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer&quot;: &quot;Bone Skewer&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer.desc&quot;: &quot;Powerful harpoon. Inflicts Slowness II and Wither. Can execute low HP enemies with Shift+C.&quot;,&#10;  &quot;item.bloodharbourripper.jaull_fish_vial&quot;: &quot;Jaull Fish Vial&quot;,&#10;  &quot;item.bloodharbourripper.jaull_fish_vial.desc&quot;: &quot;Mysterious vial found in Ancient Cities. Used to craft powerful weapons.&quot;,&#10;&#10;  &quot;creativetab.blood_harbour_ripper_tab&quot;: &quot;Blood Harbour Ripper Tab&quot;,&#10;&#10;  &quot;key.categories.bloodharbourripper&quot;: &quot;Blood Harbour Ripper&quot;,&#10;  &quot;key.bloodharbourripper.execute&quot;: &quot;Death From Below&quot;,&#10;&#10;  &quot;tooltip.bloodharbourripper.modname&quot;: &quot;Blood Harbour Ripper&quot;&#10;}" />
+              <option name="updatedContent" value="{&#10;  &quot;item.bloodharbourripper.bone_skewer_skeleton&quot;: &quot;Bone Skewer Skeleton&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_skeleton.desc&quot;: &quot;Basic throwable harpoon. Can be recalled.&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_raw&quot;: &quot;Bone Skewer Raw&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer_raw.desc&quot;: &quot;Enhanced harpoon. Inflicts Slowness II on hit.&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer&quot;: &quot;Bone Skewer&quot;,&#10;  &quot;item.bloodharbourripper.bone_skewer.desc&quot;: &quot;Powerful harpoon. Inflicts Slowness II and Wither. Can execute low HP enemies with Shift+C.&quot;,&#10;  &quot;item.bloodharbourripper.jaull_fish_vial&quot;: &quot;Jaull Fish Vial&quot;,&#10;  &quot;item.bloodharbourripper.jaull_fish_vial.desc&quot;: &quot;Mysterious vial found in Ancient Cities. Used to craft powerful weapons.&quot;,&#10;&#10;  &quot;creativetab.blood_harbour_ripper_tab&quot;: &quot;Blood Harbour Ripper Tab&quot;,&#10;&#10;  &quot;key.categories.bloodharbourripper&quot;: &quot;Blood Harbour Ripper&quot;,&#10;  &quot;key.bloodharbourripper.execute&quot;: &quot;Death From Below&quot;,&#10;&#10;  &quot;tooltip.bloodharbourripper.modname&quot;: &quot;Blood Harbour Ripper&quot;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

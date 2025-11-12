@@ -62,6 +62,8 @@ public class BloodHarbourRipper
 
         net.lordprinz.bloodharbourripper.sound.ModSounds.register(modEventBus);
 
+        net.lordprinz.bloodharbourripper.loot.ModLootModifiers.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
