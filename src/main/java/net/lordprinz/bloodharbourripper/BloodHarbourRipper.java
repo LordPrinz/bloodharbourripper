@@ -97,6 +97,7 @@ public class BloodHarbourRipper
         @SubscribeEvent
         public static void onKeyRegister(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
             event.register(net.lordprinz.bloodharbourripper.client.KeyBindings.EXECUTE_KEY);
+            event.register(net.lordprinz.bloodharbourripper.client.KeyBindings.DASH_KEY);
         }
 
         @SubscribeEvent
@@ -107,6 +108,8 @@ public class BloodHarbourRipper
                     net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerRawRenderer::new);
             event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.BONE_SKEWER_ADVANCED.get(),
                     net.lordprinz.bloodharbourripper.client.renderer.BoneSkewerAdvancedRenderer::new);
+            event.registerEntityRenderer(net.lordprinz.bloodharbourripper.item.custom.ModEntityTypes.DASH_PHANTOM.get(),
+                    net.lordprinz.bloodharbourripper.client.renderer.DashPhantomRenderer::new);
         }
     }
 }

@@ -33,6 +33,13 @@ public class ModEntityTypes {
                     .updateInterval(20)
                     .build("bone_skewer"));
 
+    public static final RegistryObject<EntityType<net.lordprinz.bloodharbourripper.entity.DashPhantomEntity>> DASH_PHANTOM = ENTITY_TYPES.register("dash_phantom",
+            () -> EntityType.Builder.<net.lordprinz.bloodharbourripper.entity.DashPhantomEntity>of(net.lordprinz.bloodharbourripper.entity.DashPhantomEntity::new, MobCategory.MISC)
+                    .sized(0.8F, 1.8F)
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("dash_phantom"));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

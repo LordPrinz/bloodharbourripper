@@ -1,6 +1,7 @@
 package net.lordprinz.bloodharbourripper.client;
 
 import net.lordprinz.bloodharbourripper.item.ModItems;
+import net.lordprinz.bloodharbourripper.network.DashPacket;
 import net.lordprinz.bloodharbourripper.network.ExecuteEntityPacket;
 import net.lordprinz.bloodharbourripper.network.ModNetworking;
 import net.minecraft.client.Minecraft;
@@ -18,6 +19,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = "bloodharbourripper", value = Dist.CLIENT)
 public class KeyInputHandler {
     private static boolean wasPressed = false;
+    private static boolean wasDashPressed = false;
     private static final double EXECUTE_RANGE = 12.0;
     private static long currentTick = 0;
 
@@ -32,18 +34,18 @@ public class KeyInputHandler {
 
             if (mc.player == null || mc.level == null) return;
 
+            Player player = mc.player;
+
             boolean isPressed = KeyBindings.EXECUTE_KEY.isDown();
 
             if (isPressed && !wasPressed) {
-                Player player = mc.player;
-
                 if (player.getMainHandItem().getItem() == ModItems.BONE_SKEWER.get() && player.isShiftKeyDown()) {
 
                     if (!ExecuteCooldownTracker.canExecute(player.getUUID(), currentTick)) {
                         long remainingTicks = ExecuteCooldownTracker.getRemainingCooldown(player.getUUID(), currentTick);
                         double remainingSeconds = remainingTicks / 20.0;
                         player.displayClientMessage(
-                            Component.literal(String.format("§cExecute on cooldown: %.1fs", remainingSeconds)),
+                            Component.literal(String.format("§Death from below on cooldown: %.1fs", remainingSeconds)),
                             true
                         );
                         wasPressed = isPressed;
@@ -91,6 +93,29 @@ public class KeyInputHandler {
             }
 
             wasPressed = isPressed;
+
+            boolean isDashPressed = KeyBindings.DASH_KEY.isDown();
+
+            if (isDashPressed && !wasDashPressed && player.isShiftKeyDown()) {
+                long gameTime = mc.level.getGameTime();
+                long remainingCooldown = DashPacket.getRemainingCooldown(player.getUUID(), gameTime);
+
+                if (remainingCooldown > 0) {
+                    double remainingSeconds = remainingCooldown / 20.0;
+                    player.displayClientMessage(
+                        Component.literal(String.format("§cPhantom Undertow on cooldown: %.1fs", remainingSeconds)),
+                        true
+                    );
+                } else {
+                    ModNetworking.sendToServer(new DashPacket());
+                    player.displayClientMessage(
+                        Component.literal("§b⚡ Phantom Undertow!"),
+                        true
+                    );
+                }
+            }
+
+            wasDashPressed = isDashPressed;
         }
     }
 }

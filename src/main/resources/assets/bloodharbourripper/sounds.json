@@ -43,6 +43,24 @@
         "stream": false
       }
     ]
+  },
+  "dash": {
+    "subtitle": "bloodharbourripper.dash",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:dash",
+        "stream": false
+      }
+    ]
+  },
+  "dash_hit": {
+    "subtitle": "bloodharbourripper.dash_hit",
+    "sounds": [
+      {
+        "name": "bloodharbourripper:dash_hit",
+        "stream": false
+      }
+    ]
   }
 }
 

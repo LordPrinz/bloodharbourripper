@@ -15,5 +15,13 @@ public class KeyBindings {
             GLFW.GLFW_KEY_C,
             KEY_CATEGORY
     );
+
+    public static final KeyMapping DASH_KEY = new KeyMapping(
+            "key.bloodharbourripper.dash",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_X,
+            KEY_CATEGORY
+    );
 }
 

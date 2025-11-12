@@ -22,6 +22,10 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> BONE_SKEWER_RETURN = registerSoundEvent("bone_skewer_return");
 
+    public static final RegistryObject<SoundEvent> DASH_SOUND = registerSoundEvent("dash");
+
+    public static final RegistryObject<SoundEvent> DASH_HIT = registerSoundEvent("dash_hit");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(BloodHarbourRipper.MOD_ID, name);
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));

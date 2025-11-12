@@ -45,17 +45,45 @@ public class ExecuteEntityPacket {
                     double distance = player.distanceTo(target);
                     float healthPercentage = target.getHealth() / target.getMaxHealth();
 
-                    // Sprawdź czy mob jest w zasięgu (12 bloków) i ma <33% HP
-                    if (distance <= 12.0 && healthPercentage < 0.33f) {
-                        // Odtwórz CUSTOM dźwięk egzekucji NATYCHMIAST
+                    // Sprawdź czy cel nie jest sojusznikiem
+                    boolean isAlly = false;
+
+                    // Sprawdź czy to gracz z tej samej drużyny
+                    if (target instanceof ServerPlayer targetPlayer) {
+                        if (player.getTeam() != null && player.getTeam().equals(targetPlayer.getTeam())) {
+                            isAlly = true;
+                        }
+                    }
+
+                    // Sprawdź czy mob jest oswojony przez gracza lub jego drużynę
+                    if (target instanceof net.minecraft.world.entity.TamableAnimal tamable) {
+                        if (tamable.isTame() && tamable.getOwner() != null) {
+                            if (tamable.getOwner().equals(player)) {
+                                isAlly = true;
+                            }
+                            // Sprawdź czy właściciel jest w drużynie gracza
+                            if (player.getTeam() != null && tamable.getOwner() instanceof ServerPlayer owner) {
+                                if (player.getTeam().equals(owner.getTeam())) {
+                                    isAlly = true;
+                                }
+                            }
+                        }
+                    }
+
+                    // Sprawdź czy mob jest w tej samej drużynie co gracz
+                    if (player.getTeam() != null && target.getTeam() != null) {
+                        if (player.getTeam().equals(target.getTeam())) {
+                            isAlly = true;
+                        }
+                    }
+
+                    if (distance <= 12.0 && healthPercentage < 0.33f && !isAlly) {
                         player.level().playSound(null, target.blockPosition(),
                             net.lordprinz.bloodharbourripper.sound.ModSounds.EXECUTE_SOUND.get(),
                             SoundSource.PLAYERS, 1.5F, 1.0F);
 
-                        // Zaplanuj śmierć moba po 0.65 sekundy używając ExecutionScheduler
-                        // Przekaż UUID gracza i pozycję moba
                         ExecutionScheduler.scheduleExecution(target.getUUID(), player.getUUID(),
-                            target.position(), 13); // 13 ticków = 0.65 sekundy
+                            target.position(), 13);
                     }
                 }
             }
@@ -63,10 +91,8 @@ public class ExecuteEntityPacket {
         return true;
     }
 
-    // Scheduler do opóźnionej egzekucji
     @Mod.EventBusSubscriber
     public static class ExecutionScheduler {
-        // Mapa: UUID moba -> (UUID gracza, pozycja moba, pozostały czas)
         private static final Map<UUID, ExecutionData> scheduledExecutions = new HashMap<>();
 
         private static class ExecutionData {
@@ -88,7 +114,6 @@ public class ExecuteEntityPacket {
         @SubscribeEvent
         public static void onServerTick(TickEvent.ServerTickEvent event) {
             if (event.phase == TickEvent.Phase.END) {
-                // Lista UUID do usunięcia
                 List<UUID> toRemove = new ArrayList<>();
 
                 for (Map.Entry<UUID, ExecutionData> entry : scheduledExecutions.entrySet()) {
@@ -96,12 +121,10 @@ public class ExecuteEntityPacket {
                     data.remainingTicks--;
 
                     if (data.remainingTicks <= 0) {
-                        // Czas wykonać egzekucję
                         UUID entityUUID = entry.getKey();
                         UUID playerUUID = data.playerUUID;
                         Vec3 targetPosition = data.targetPosition;
 
-                        // Znajdź gracza
                         ServerPlayer executingPlayer = null;
                         ServerLevel executingPlayerLevel = null;
                         for (ServerLevel searchLevel : event.getServer().getAllLevels()) {
@@ -112,22 +135,28 @@ public class ExecuteEntityPacket {
                             }
                         }
 
-                        // Znajdź i zabij encję
                         boolean found = false;
                         for (ServerLevel searchLevel : event.getServer().getAllLevels()) {
                             for (Entity searchEntity : searchLevel.getAllEntities()) {
                                 if (searchEntity.getUUID().equals(entityUUID) && searchEntity instanceof LivingEntity targetLiving && targetLiving.isAlive()) {
-                                    // Użyj hurt() z player damage source aby gracz dostał XP
-                                    if (executingPlayer != null) {
-                                        targetLiving.hurt(targetLiving.damageSources().playerAttack(executingPlayer), Float.MAX_VALUE);
+                                    if (targetLiving.isBlocking()) {
+                                        targetLiving.stopUsingItem();
+                                    }
 
-                                        // Teleportuj gracza do pozycji moba
+                                    float executionDamage = targetLiving.getMaxHealth() * 100.0f;
+
+                                    if (executingPlayer != null) {
+                                        targetLiving.hurt(targetLiving.damageSources().playerAttack(executingPlayer), executionDamage);
+
+                                        if (targetLiving.isAlive()) {
+                                            targetLiving.hurt(targetLiving.damageSources().fellOutOfWorld(), executionDamage);
+                                        }
+
                                         executingPlayer.teleportTo(targetPosition.x, targetPosition.y, targetPosition.z);
 
-                                        // Spawn ocean particles w miejscu egzekucji
                                         spawnOceanParticles(executingPlayerLevel, targetPosition);
                                     } else {
-                                        targetLiving.hurt(targetLiving.damageSources().generic(), Float.MAX_VALUE);
+                                        targetLiving.hurt(targetLiving.damageSources().fellOutOfWorld(), executionDamage);
                                     }
                                     found = true;
                                     break;
@@ -150,23 +179,18 @@ public class ExecuteEntityPacket {
         private static void spawnOceanParticles(ServerLevel level, Vec3 position) {
             if (level == null) return;
 
-            // Spawn różnych typów ocean particles
-            // BUBBLE_POP - bąbelki pękające
             level.sendParticles(net.minecraft.core.particles.ParticleTypes.BUBBLE_POP,
                 position.x, position.y + 1, position.z,
                 30, 0.5, 0.5, 0.5, 0.1);
 
-            // BUBBLE_COLUMN_UP - kolumna bąbelków w górę
             level.sendParticles(net.minecraft.core.particles.ParticleTypes.BUBBLE_COLUMN_UP,
                 position.x, position.y, position.z,
                 20, 0.3, 0.3, 0.3, 0.1);
 
-            // SPLASH - splash wody
             level.sendParticles(net.minecraft.core.particles.ParticleTypes.SPLASH,
                 position.x, position.y + 0.5, position.z,
                 40, 0.8, 0.5, 0.8, 0.2);
 
-            // FISHING - efekt wędkarski (ocean look)
             level.sendParticles(net.minecraft.core.particles.ParticleTypes.FISHING,
                 position.x, position.y + 1.5, position.z,
                 15, 0.4, 0.4, 0.4, 0.15);

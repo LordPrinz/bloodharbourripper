@@ -31,6 +31,12 @@ public class ModNetworking {
                 .encoder(ExecuteEntityPacket::toBytes)
                 .consumerMainThread(ExecuteEntityPacket::handle)
                 .add();
+
+        net.messageBuilder(DashPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(DashPacket::new)
+                .encoder(DashPacket::toBytes)
+                .consumerMainThread(DashPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
