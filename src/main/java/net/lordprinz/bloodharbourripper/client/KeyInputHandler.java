@@ -125,10 +125,6 @@ public class KeyInputHandler {
 
             if (isDashPressed && !wasDashPressed && player.isShiftKeyDown()) {
                 if (player.getMainHandItem().getItem() != ModItems.BONE_SKEWER.get()) {
-                    player.displayClientMessage(
-                        Component.literal("§cYou need to hold Bone Skewer to use Phantom Undertow!"),
-                        true
-                    );
                     wasDashPressed = isDashPressed;
                     return;
                 }

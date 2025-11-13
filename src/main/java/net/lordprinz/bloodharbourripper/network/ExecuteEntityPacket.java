@@ -6,8 +6,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkEvent;
@@ -94,6 +98,7 @@ public class ExecuteEntityPacket {
     @Mod.EventBusSubscriber
     public static class ExecutionScheduler {
         private static final Map<UUID, ExecutionData> scheduledExecutions = new HashMap<>();
+        private static final Map<UUID, UUID> executionKills = new HashMap<>();
 
         private static class ExecutionData {
             final UUID playerUUID;
@@ -142,6 +147,8 @@ public class ExecuteEntityPacket {
                                     if (targetLiving.isBlocking()) {
                                         targetLiving.stopUsingItem();
                                     }
+
+                                    executionKills.put(targetLiving.getUUID(), playerUUID);
 
                                     float executionDamage = targetLiving.getMaxHealth() * 100.0f;
 
@@ -194,6 +201,38 @@ public class ExecuteEntityPacket {
             level.sendParticles(net.minecraft.core.particles.ParticleTypes.FISHING,
                 position.x, position.y + 1.5, position.z,
                 15, 0.4, 0.4, 0.4, 0.15);
+        }
+
+        @SubscribeEvent
+        public static void onLivingDrops(LivingDropsEvent event) {
+            LivingEntity entity = event.getEntity();
+            if (executionKills.containsKey(entity.getUUID())) {
+                List<ItemEntity> originalDrops = new ArrayList<>(event.getDrops());
+
+                for (ItemEntity itemEntity : originalDrops) {
+                    ItemStack stack = itemEntity.getItem().copy();
+                    ItemEntity duplicate = new ItemEntity(
+                        entity.level(),
+                        itemEntity.getX(),
+                        itemEntity.getY(),
+                        itemEntity.getZ(),
+                        stack
+                    );
+                    duplicate.setDefaultPickUpDelay();
+                    event.getDrops().add(duplicate);
+                }
+
+                executionKills.remove(entity.getUUID());
+            }
+        }
+
+        @SubscribeEvent
+        public static void onExperienceDrop(LivingExperienceDropEvent event) {
+            LivingEntity entity = event.getEntity();
+            if (executionKills.containsKey(entity.getUUID())) {
+                int originalXP = event.getDroppedExperience();
+                event.setDroppedExperience(originalXP * 2);
+            }
         }
     }
 }
