@@ -20,7 +20,6 @@ public class BoneSkewerTracker {
 
     public static AbstractArrow getActiveSkewer(Player player) {
         AbstractArrow skewer = activeSkewerMap.get(player.getUUID());
-        // Sprawdź czy harpun nadal istnieje
         if (skewer != null && !skewer.isAlive()) {
             activeSkewerMap.remove(player.getUUID());
             return null;

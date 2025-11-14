@@ -49,23 +49,19 @@ public class ExecuteEntityPacket {
                     double distance = player.distanceTo(target);
                     float healthPercentage = target.getHealth() / target.getMaxHealth();
 
-                    // Sprawdź czy cel nie jest sojusznikiem
                     boolean isAlly = false;
 
-                    // Sprawdź czy to gracz z tej samej drużyny
                     if (target instanceof ServerPlayer targetPlayer) {
                         if (player.getTeam() != null && player.getTeam().equals(targetPlayer.getTeam())) {
                             isAlly = true;
                         }
                     }
 
-                    // Sprawdź czy mob jest oswojony przez gracza lub jego drużynę
                     if (target instanceof net.minecraft.world.entity.TamableAnimal tamable) {
                         if (tamable.isTame() && tamable.getOwner() != null) {
                             if (tamable.getOwner().equals(player)) {
                                 isAlly = true;
                             }
-                            // Sprawdź czy właściciel jest w drużynie gracza
                             if (player.getTeam() != null && tamable.getOwner() instanceof ServerPlayer owner) {
                                 if (player.getTeam().equals(owner.getTeam())) {
                                     isAlly = true;
@@ -74,7 +70,6 @@ public class ExecuteEntityPacket {
                         }
                     }
 
-                    // Sprawdź czy mob jest w tej samej drużynie co gracz
                     if (player.getTeam() != null && target.getTeam() != null) {
                         if (player.getTeam().equals(target.getTeam())) {
                             isAlly = true;
@@ -176,7 +171,6 @@ public class ExecuteEntityPacket {
                     }
                 }
 
-                // Usuń wykonane egzekucje
                 for (UUID uuid : toRemove) {
                     scheduledExecutions.remove(uuid);
                 }

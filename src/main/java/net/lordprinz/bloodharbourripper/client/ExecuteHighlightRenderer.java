@@ -18,7 +18,8 @@ public class ExecuteHighlightRenderer {
     private static java.util.Set<java.util.UUID> previouslyGlowing = new java.util.HashSet<>();
 
     private static boolean isAlly(Player player, LivingEntity target) {
-        if (target instanceof Player targetPlayer) {
+        if (!(target instanceof Player targetPlayer)) {
+        } else {
             if (player.getTeam() != null && player.getTeam().equals(targetPlayer.getTeam())) {
                 return true;
             }

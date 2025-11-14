@@ -38,7 +38,7 @@ public class BoneSkewerRawEntity extends AbstractArrow {
         this.skewerItem = stack.copy();
         this.entityData.set(ID_LOYALTY, (byte) 3);
         this.entityData.set(ID_FOIL, stack.hasFoil());
-        this.pickup = AbstractArrow.Pickup.CREATIVE_ONLY; // Nie pozwalaj na normalne podnoszenie
+        this.pickup = AbstractArrow.Pickup.CREATIVE_ONLY; 
     }
 
     @Override
@@ -72,7 +72,7 @@ public class BoneSkewerRawEntity extends AbstractArrow {
 
                 double d0 = 0.05 * (double) i;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95).add(vec3.normalize().scale(d0)));
-                // Dźwięk powrotu usunięty - tylko custom dźwięki
+                
                 ++this.clientSideReturnTridentTickCount;
             }
         }
@@ -93,18 +93,18 @@ public class BoneSkewerRawEntity extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
 
-        // Wyłącz tarczę jeśli cel blokuje
+        
         if (entity instanceof LivingEntity livingTarget) {
             if (livingTarget.isBlocking()) {
                 livingTarget.stopUsingItem();
-                // Dodaj cooldown tylko dla graczy
+                
                 if (livingTarget instanceof Player playerTarget) {
                     playerTarget.getCooldowns().addCooldown(livingTarget.getUseItem().getItem(), 100);
                 }
             }
         }
 
-        // Damage jak z ręki: Diamond Sword (7) + 1 = 8
+        
         float f = 8.0F;
         if (entity instanceof LivingEntity livingentity) {
             f += EnchantmentHelper.getDamageBonus(this.skewerItem, livingentity.getMobType());
@@ -126,17 +126,17 @@ public class BoneSkewerRawEntity extends AbstractArrow {
                 }
                 this.doPostHurtEffects(livingentity1);
 
-                // Aplikuj Slowness II na 2 sekundy (40 ticków)
+
                 livingentity1.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1));
 
-                // Przyciąganie do gracza - silniejsze niż skeleton
+
                 if (owner != null && !this.level().isClientSide) {
                     Vec3 ownerPos = owner.position();
                     Vec3 entityPos = entity.position();
                     double distance = ownerPos.distanceTo(entityPos);
                     Vec3 direction = ownerPos.subtract(entityPos).normalize();
-                    // Silniejsze przyciąganie - mob leci szybciej do gracza
-                    double pullStrength = Math.min(distance * 0.4, 2.5); // 40% dystansu, max 2.5
+
+                    double pullStrength = Math.min(distance * 0.4, 2.5);
                     entity.setDeltaMovement(direction.scale(pullStrength));
                     entity.hurtMarked = true;
                 }
@@ -154,38 +154,38 @@ public class BoneSkewerRawEntity extends AbstractArrow {
 
     @Override
     protected boolean tryPickup(Player player) {
-        // Nie pozwalaj na normalne podnoszenie - harpun może tylko wrócić sam
+
         return false;
     }
 
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
-        // Custom dźwięk powrotu/uderzenia w ziemię
+
         return net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RETURN.get();
     }
 
     @Override
     protected void onHitBlock(net.minecraft.world.phys.BlockHitResult result) {
         super.onHitBlock(result);
-        // Odtwórz dźwięk BONE_SKEWER_RETURN gdy harpun uderza w blok (hybienie)
+
         this.playSound(net.lordprinz.bloodharbourripper.sound.ModSounds.BONE_SKEWER_RETURN.get(), 1.0F, 1.0F);
     }
 
     @Override
     public void playerTouch(Player player) {
-        // Jeśli harpun wraca (jest w trybie NoPhysics) i należy do gracza
+
         if (this.ownedBy(player) && this.isNoPhysics()) {
             if (!this.level().isClientSide) {
 
-                // Usuń śledzenie gdy harpun wraca
+
                 BoneSkewerTracker.removeSkewer(player);
-                // Usuń cooldown - gracz może znowu użyć harpuna
+
                 player.getCooldowns().removeCooldown(ModItems.BONE_SKEWER_RAW.get());
-                // Usuń encję harpuna (nie dodawaj do ekwipunku - item już tam jest)
+
                 this.discard();
             }
         }
-        // Nie wywołuj super.playerTouch() - zapobiega to podnoszeniu
+
     }
 
     @Override
@@ -221,11 +221,11 @@ public class BoneSkewerRawEntity extends AbstractArrow {
         return this.skewerItem;
     }
 
-    // Metoda do wymuszenia powrotu harpuna
+
     public void forceReturn() {
         this.dealtDamage = true;
         this.setNoPhysics(true);
-        // Natychmiast zatrzymaj harpun, aby w następnym ticku zaczął wracać
+
         this.setDeltaMovement(Vec3.ZERO);
     }
 }
