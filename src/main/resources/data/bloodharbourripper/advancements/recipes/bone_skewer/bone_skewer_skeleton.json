@@ -4,16 +4,62 @@
     "has_bone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [ { "items": ["minecraft:bone"] } ]
+        "items": [
+          {
+            "items": ["minecraft:bone"]
+          }
+        ]
+      }
+    },
+    "has_trident": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:trident"]
+          }
+        ]
+      }
+    },
+    "has_nether_star": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:nether_star"]
+          }
+        ]
+      }
+    },
+    "has_diamond_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:diamond_sword"]
+          }
+        ]
       }
     },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
-      "conditions": { "recipe": "bloodharbourripper:bone_skewer_skeleton" }
+      "conditions": {
+        "recipe": "bloodharbourripper:bone_skewer_skeleton"
+      }
     }
   },
-  "requirements": [ [ "has_bone", "has_the_recipe" ] ],
+  "requirements": [
+    [
+      "has_bone",
+      "has_trident",
+      "has_nether_star",
+      "has_diamond_sword",
+      "has_the_recipe"
+    ]
+  ],
   "rewards": {
-    "recipes": [ "bloodharbourripper:bone_skewer_skeleton" ]
+    "recipes": [
+      "bloodharbourripper:bone_skewer_skeleton"
+    ]
   }
 }
