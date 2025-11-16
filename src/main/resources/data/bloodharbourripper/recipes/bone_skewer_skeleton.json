@@ -32,11 +32,13 @@
       "item": "minecraft:waxed_cut_copper_block"
     },
     "I": {
-        "item": "minecraft:heart_of_the_sea"
-  }},
+      "item": "minecraft:heart_of_the_sea"
+    }
+  },
   "result": {
     "item": "bloodharbourripper:bone_skewer_skeleton",
     "count": 1
   },
+  "group": "bone_skewer",
   "show_notification": true
 }
