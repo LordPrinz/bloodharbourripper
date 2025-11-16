@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "bloodharbourripper:bone_skewer"
+    },
+    "title": {
+      "translate": "advancement.bloodharbourripper.sink_them_all.title"
+    },
+    "description": {
+      "translate": "advancement.bloodharbourripper.sink_them_all.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:story/root",
+  "criteria": {
+    "has_bone_skewer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["bloodharbourripper:bone_skewer"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}
+

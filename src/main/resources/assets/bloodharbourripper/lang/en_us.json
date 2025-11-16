@@ -14,5 +14,8 @@
   "key.bloodharbourripper.execute": "Death From Below",
   "key.bloodharbourripper.dash": "Phantom Undertow",
 
-  "tooltip.bloodharbourripper.modname": "Blood Harbour Ripper"
+  "tooltip.bloodharbourripper.modname": "Blood Harbour Ripper",
+
+  "advancement.bloodharbourripper.sink_them_all.title": "Sink them all!",
+  "advancement.bloodharbourripper.sink_them_all.description": "Obtain the ultimate Bone Skewer and become the terror of the seas"
 }

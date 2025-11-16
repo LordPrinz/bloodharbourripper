@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [ { "items": ["minecraft:bone"] } ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": { "recipe": "bloodharbourripper:bone_skewer_skeleton" }
+    }
+  },
+  "requirements": [ [ "has_bone", "has_the_recipe" ] ],
+  "rewards": {
+    "recipes": [ "bloodharbourripper:bone_skewer_skeleton" ]
+  }
+}
