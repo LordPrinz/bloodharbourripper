@@ -21,3 +21,8 @@ build
 # other
 eclipse
 run
+run-data
+.DS_Store
+
+# oh-my-claudecode state
+.omc/

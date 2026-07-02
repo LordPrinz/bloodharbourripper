@@ -1,0 +1,14 @@
+{
+  "type": "bloodharbourripper:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/ancient_city"
+    }
+  ],
+  "item": "bloodharbourripper:jaull_fish_vial",
+  "min_count": 1,
+  "max_count": 1,
+  "chance": 0.33
+}
+
