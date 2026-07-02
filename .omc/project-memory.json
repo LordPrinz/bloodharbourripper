@@ -1,0 +1,139 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1782982665840,
+  "projectRoot": "/Users/lordprinz/Developer/minecraft-modding/bloodharbour-mod",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Java/Kotlin",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "build.gradle"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "gradle",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "26.2",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "buildSrc": {
+      "path": "buildSrc",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1782982665756,
+      "keyFiles": [
+        "build.gradle"
+      ]
+    },
+    "common": {
+      "path": "common",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1782982665756,
+      "keyFiles": [
+        "build.gradle"
+      ]
+    },
+    "fabric": {
+      "path": "fabric",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1782982665756,
+      "keyFiles": [
+        "build.gradle"
+      ]
+    },
+    "forge": {
+      "path": "forge",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1782982665756,
+      "keyFiles": [
+        "build.gradle"
+      ]
+    },
+    "gradle": {
+      "path": "gradle",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1782982665756,
+      "keyFiles": []
+    },
+    "buildSrc/build": {
+      "path": "buildSrc/build",
+      "purpose": "Build output",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "buildSrc/src": {
+      "path": "buildSrc/src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "common/build": {
+      "path": "common/build",
+      "purpose": "Build output",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "common/src": {
+      "path": "common/src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "fabric/build": {
+      "path": "fabric/build",
+      "purpose": "Build output",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "fabric/src": {
+      "path": "fabric/src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    },
+    "forge/src": {
+      "path": "forge/src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1782982665757,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
