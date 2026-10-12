@@ -12,7 +12,7 @@ mod.description = "A dark, sea-themed weapon mod: throwable Bone Skewers, execut
 
 # Publishing (fill in the project IDs once the projects exist; tokens come from env vars)
 publish.modrinth_id = ""
-publish.curseforge_id = ""
+publish.curseforge_id = "1386162"
 # release | beta | alpha
 publish.type = "release"
 

@@ -1,6 +1,9 @@
 # Blood Harbour Ripper
 
 A dark, sea-themed weapon mod: throwable Bone Skewers, executions and the Phantom Undertow dash.
+Inspired by Pyke, the Bloodharbor Ripper.
+
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-bloodharbour-ripper)
 
 ## Supported versions
 
@@ -40,6 +43,11 @@ Gradle downloads the required JDKs (17, 21, 25) automatically.
 
 See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for the project layout, how to add features without
 breaking older versions, how to add a new Minecraft version and how releases are published.
+
+## Disclaimer
+
+Unofficial fan-made mod. Not affiliated with, endorsed or sponsored by Riot Games; League of Legends
+and Pyke are trademarks of Riot Games, Inc.
 
 ## License
 
