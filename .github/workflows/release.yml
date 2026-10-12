@@ -1,0 +1,50 @@
+name: Release
+
+# Push a tag like `v1.1.0` (matching `mod.version`) to build every version and publish it to
+# Modrinth and CurseForge. Required repository secrets: MODRINTH_TOKEN, CURSEFORGE_TOKEN.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            21
+            25
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Check that the tag matches mod.version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          version=$(sed -n 's/^mod.version = "\(.*\)"/\1/p' stonecutter.properties.toml)
+          if [ "v$version" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match mod.version $version" >&2
+            exit 1
+          fi
+
+      - name: Build and publish all versions
+        run: ./gradlew buildAndCollect publishMods --stacktrace
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+
+      - name: Attach jars to the GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes=$(awk -v v="${GITHUB_REF_NAME#v}" '/^## \[/ { p = index($0, "## [" v "]") == 1; next } p' CHANGELOG.md)
+          gh release create "${GITHUB_REF_NAME}" build/libs/*/*.jar --title "${GITHUB_REF_NAME}" --notes "$notes"

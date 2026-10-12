@@ -1,43 +1,45 @@
 # Blood Harbour Ripper
 
-A dark and mysterious Minecraft mod for Minecraft 1.20.1.
+A dark, sea-themed weapon mod: throwable Bone Skewers, executions and the Phantom Undertow dash.
 
-Built on the [MultiLoader Template](https://github.com/jaredlll08/MultiLoader-Template): the `common` module holds loader-neutral code, while loader-specific modules load the mod.
+## Supported versions
 
-## Status
+| Minecraft | Loaders           | Java |
+|-----------|-------------------|------|
+| 1.20.1    | Forge, Fabric     | 17   |
+| 1.21.1    | NeoForge, Fabric  | 21   |
+| 1.21.11   | NeoForge, Fabric  | 21   |
+| 26.2      | NeoForge, Fabric  | 25   |
+| 26.3      | NeoForge, Fabric  | 25   |
 
-| Loader | Status |
-|---|---|
-| Forge 1.20.1 (47.4.0) | Fully implemented (`forge/`) |
-| Fabric 1.20.1 | Stub only — not yet ported (`fabric/`) |
-
-The mod content currently lives entirely in the `forge/` module because it relies on Forge-specific APIs (SimpleChannel networking, global loot modifiers, `ForgeConfigSpec` config, Forge event bus).
+Fabric builds require [Fabric API](https://modrinth.com/mod/fabric-api). The mod is required on
+both client and server.
 
 ## Features
 
-- **Bone Skewers** — three tiers of throwable skewer weapons (skeleton, raw, advanced) with custom projectile entities, renderers, and sounds
-- **Execute** — keybound execute attack with cooldown tracking, target highlighting, and marker rendering
-- **Dash** — keybound dash ability with a dash phantom effect
-- **Jaull Fish Vial** — found in Ancient City loot (injected via global loot modifier)
-- Custom creative tab, advancements, and recipes
+- **Bone Skewers** — three tiers (Skeleton → Raw → Bone Skewer). Swords in melee; hold right click
+  to throw them like a loyal trident, right click again to recall. Hits pull the target towards you.
+- **Death From Below** (`Shift` + `C`, Bone Skewer in hand) — marks the nearest enemy below 33%
+  health, executes it, drops its loot and experience a second time and pulls you to it.
+  Valid targets are outlined while you hold the Bone Skewer.
+- **Phantom Undertow** (`Shift` + `X`, Bone Skewer in hand) — dash forward; your afterimage rushes
+  back and damages, blinds and freezes everything on its path.
+- **Jaull Fish Vial** — found in Ancient City chests, used to upgrade the skewers.
 
 ## Building
 
-Requires Java 17.
+Everything is built from one source tree with [Stonecutter](https://stonecutter.kikugie.dev/).
+Gradle downloads the required JDKs (17, 21, 25) automatically.
 
 ```bash
-./gradlew build          # build all modules
-./gradlew :forge:build   # Forge jar only
+./gradlew build             # every version and loader
+./gradlew buildAndCollect   # …and copy the jars to build/libs/<mod version>/
+./gradlew :1.21.1-neoforge:build
+./gradlew :26.3-fabric:runClient
 ```
 
-Jars land in `<module>/build/libs/`.
-
-## Running in development
-
-```bash
-./gradlew :forge:runClient
-./gradlew :forge:runServer
-```
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for the project layout, how to add features without
+breaking older versions, how to add a new Minecraft version and how releases are published.
 
 ## License
 
