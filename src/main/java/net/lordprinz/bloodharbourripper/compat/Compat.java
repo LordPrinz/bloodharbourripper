@@ -55,7 +55,7 @@ public final class Compat {
     /** Forces the server to send the entity's new velocity to clients (needed after setDeltaMovement). */
     public static void syncVelocity(Entity entity) {
         //? if >=26.3 {
-        entity.needsSync = true;
+        entity.syncVelocity = true;
         //?} else {
         /*entity.hurtMarked = true;
         *///?}

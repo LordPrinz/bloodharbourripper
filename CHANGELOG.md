@@ -5,6 +5,13 @@ All notable changes to this project are documented here. The format follows
 [Semantic Versioning](https://semver.org/). The section matching `mod.version` in
 `stonecutter.properties.toml` is used as the Modrinth/CurseForge changelog.
 
+## [1.1.2]
+
+### Fixed
+- Minecraft 26.3: Phantom Undertow did not launch the player forward (the afterimage still
+  appeared), and Bone Skewer hits did not pull other players. The new velocity was not sent to
+  the affected player's own client.
+
 ## [1.1.1]
 
 ### Fixed

@@ -5,7 +5,7 @@ mod.id = "bloodharbourripper"
 mod.name = "Blood Harbour Ripper"
 mod.group = "net.lordprinz.bloodharbourripper"
 # Bump this on every release (semver). The published version becomes `<mod.version>+<mc>-<loader>`.
-mod.version = "1.1.1"
+mod.version = "1.1.2"
 mod.authors = "LordPrinz"
 mod.license = "All Rights Reserved"
 mod.description = "A dark, sea-themed weapon mod: throwable Bone Skewers, executions and the Phantom Undertow dash."

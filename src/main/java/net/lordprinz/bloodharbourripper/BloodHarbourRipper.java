@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class BloodHarbourRipper {
     public static final String MOD_ID = "bloodharbourripper";
-    public static final String VERSION = /*$ mod_version*/ "1.1.1";
+    public static final String VERSION = /*$ mod_version*/ "1.1.2";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     private BloodHarbourRipper() {}
