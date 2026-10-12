@@ -14,6 +14,13 @@ All notable changes to this project are documented here. The format follows
 - Subtitles for all mod sounds and translatable action-bar messages.
 
 ### Changed
+- New crafting progression:
+  - **Bone Skewer Skeleton** — crafting table: 3 Prismarine Shards, 1 Nautilus Shell, 1 Bone
+    (previously a Nether Star, Trident, Diamond Sword, Gold Block, Diamond Block, Recovery Compass
+    and Heart of the Sea — more than the final tier).
+  - **Bone Skewer Raw** — smithing table: Jaull Fish Vial + Bone Skewer Skeleton + Echo Shard.
+  - **Bone Skewer** — smithing table: Jaull Fish Vial + Bone Skewer Raw + Heart of the Sea.
+  - Upgrading at the smithing table keeps enchantments, name and durability.
 - The Jaull Fish Vial Ancient City loot is now injected the same way on every loader
   (33% chance for one vial per chest, as before on Forge).
 - Executions give a second roll of the target's loot table and experience instead of

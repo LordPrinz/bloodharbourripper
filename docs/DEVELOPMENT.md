@@ -106,7 +106,9 @@ JSON cannot hold Stonecutter comments, so data whose format changed lives in
 | `26.3`   | 26.3+           | `recipe_unlocked` uses `recipes` |
 | `1.21.4` | 1.21.4+ (stacked on top) | item model definitions in `assets/<ns>/items/` |
 
-When you add a recipe or advancement, add it to every overlay. When Minecraft changes a format
+Recipes and their unlock advancements are generated: edit `tools/generate_data.py` and run
+`python3 tools/generate_data.py` — it writes every overlay in the right format. Other data files
+must be added to every overlay by hand. When Minecraft changes a format
 again, copy the newest overlay to a folder named after the new version, adapt it and add the folder
 name to the list in `buildSrc/src/main/kotlin/mod-conventions.gradle.kts`.
 

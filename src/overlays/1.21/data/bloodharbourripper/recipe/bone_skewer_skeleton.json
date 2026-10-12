@@ -3,37 +3,19 @@
   "category": "equipment",
   "group": "bone_skewer",
   "pattern": [
-    "CBA",
-    "DEF",
-    "GHI"
+    " PP",
+    " NP",
+    "B  "
   ],
   "key": {
-    "A": {
-      "item": "minecraft:trident"
-    },
-    "B": {
-      "item": "minecraft:nether_star"
-    },
-    "C": {
-      "item": "minecraft:diamond_sword"
-    },
-    "D": {
+    "P": {
       "item": "minecraft:prismarine_shard"
     },
-    "E": {
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "B": {
       "item": "minecraft:bone"
-    },
-    "F": {
-      "item": "minecraft:gold_block"
-    },
-    "G": {
-      "item": "minecraft:recovery_compass"
-    },
-    "H": {
-      "item": "minecraft:diamond_block"
-    },
-    "I": {
-      "item": "minecraft:heart_of_the_sea"
     }
   },
   "result": {

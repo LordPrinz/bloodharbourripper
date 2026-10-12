@@ -1,22 +1,22 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bone_skewer_raw": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "bloodharbourripper:bone_skewer_raw"
-          }
-        ]
-      }
-    },
     "has_jaull_fish_vial": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": "bloodharbourripper:jaull_fish_vial"
+          }
+        ]
+      }
+    },
+    "has_bone_skewer_raw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "bloodharbourripper:bone_skewer_raw"
           }
         ]
       }
@@ -30,8 +30,8 @@
   },
   "requirements": [
     [
-      "has_bone_skewer_raw",
       "has_jaull_fish_vial",
+      "has_bone_skewer_raw",
       "has_the_recipe"
     ]
   ],

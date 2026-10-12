@@ -1,42 +1,22 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bone": {
+    "has_nautilus_shell": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "minecraft:bone"
+            "items": "minecraft:nautilus_shell"
           }
         ]
       }
     },
-    "has_trident": {
+    "has_prismarine_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "minecraft:trident"
-          }
-        ]
-      }
-    },
-    "has_nether_star": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:nether_star"
-          }
-        ]
-      }
-    },
-    "has_diamond_sword": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:diamond_sword"
+            "items": "minecraft:prismarine_shard"
           }
         ]
       }
@@ -50,10 +30,8 @@
   },
   "requirements": [
     [
-      "has_bone",
-      "has_trident",
-      "has_nether_star",
-      "has_diamond_sword",
+      "has_nautilus_shell",
+      "has_prismarine_shard",
       "has_the_recipe"
     ]
   ],

@@ -1,23 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "group": "bone_skewer",
-  "pattern": [
-    " J ",
-    "JSJ",
-    " J "
-  ],
-  "key": {
-    "S": {
-      "item": "bloodharbourripper:bone_skewer_skeleton"
-    },
-    "J": {
-      "item": "bloodharbourripper:jaull_fish_vial"
-    }
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "bloodharbourripper:jaull_fish_vial"
+  },
+  "base": {
+    "item": "bloodharbourripper:bone_skewer_skeleton"
+  },
+  "addition": {
+    "item": "minecraft:echo_shard"
   },
   "result": {
     "item": "bloodharbourripper:bone_skewer_raw",
     "count": 1
-  },
-  "show_notification": true
+  }
 }

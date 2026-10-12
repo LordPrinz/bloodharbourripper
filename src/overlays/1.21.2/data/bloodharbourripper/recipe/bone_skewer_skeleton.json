@@ -3,20 +3,14 @@
   "category": "equipment",
   "group": "bone_skewer",
   "pattern": [
-    "CBA",
-    "DEF",
-    "GHI"
+    " PP",
+    " NP",
+    "B  "
   ],
   "key": {
-    "A": "minecraft:trident",
-    "B": "minecraft:nether_star",
-    "C": "minecraft:diamond_sword",
-    "D": "minecraft:prismarine_shard",
-    "E": "minecraft:bone",
-    "F": "minecraft:gold_block",
-    "G": "minecraft:recovery_compass",
-    "H": "minecraft:diamond_block",
-    "I": "minecraft:heart_of_the_sea"
+    "P": "minecraft:prismarine_shard",
+    "N": "minecraft:nautilus_shell",
+    "B": "minecraft:bone"
   },
   "result": {
     "id": "bloodharbourripper:bone_skewer_skeleton",
