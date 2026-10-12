@@ -123,6 +123,13 @@ def sink_them_all(era):
     }
 
 
+# Vanilla item tags the skewers join. `minecraft:swords` feeds every sword enchantment tag
+# (enchantable/sword, sharp_weapon, melee_weapon, fire_aspect, sweeping, durability, ...).
+ITEM_TAGS = {
+    "minecraft:swords": [f"{NS}:bone_skewer_skeleton", f"{NS}:bone_skewer_raw", f"{NS}:bone_skewer"],
+}
+
+
 def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2) + "\n")
@@ -140,6 +147,10 @@ def main():
             write(recipe_dir / f"{name}.json", recipe_json(name, spec, era))
             write(advancement_dir / "recipes" / "bone_skewer" / f"{name}.json", unlock_advancement(name, spec, era))
         write(advancement_dir / "sink_them_all.json", sink_them_all(era))
+        for tag, values in ITEM_TAGS.items():
+            namespace, path = tag.split(":")
+            tag_dir = ROOT / overlay / "data" / namespace / "tags" / ("items" if plural else "item")
+            write(tag_dir / f"{path}.json", {"replace": False, "values": values})
         print(f"generated {overlay}")
 
 

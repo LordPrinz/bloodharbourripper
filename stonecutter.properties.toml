@@ -5,13 +5,13 @@ mod.id = "bloodharbourripper"
 mod.name = "Blood Harbour Ripper"
 mod.group = "net.lordprinz.bloodharbourripper"
 # Bump this on every release (semver). The published version becomes `<mod.version>+<mc>-<loader>`.
-mod.version = "1.1.0"
+mod.version = "1.1.1"
 mod.authors = "LordPrinz"
 mod.license = "All Rights Reserved"
 mod.description = "A dark, sea-themed weapon mod: throwable Bone Skewers, executions and the Phantom Undertow dash."
 
 # Publishing (fill in the project IDs once the projects exist; tokens come from env vars)
-publish.modrinth_id = ""
+publish.modrinth_id = "fXD1479W"
 publish.curseforge_id = "1386162"
 # release | beta | alpha
 publish.type = "release"

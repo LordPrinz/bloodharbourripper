@@ -5,6 +5,17 @@ All notable changes to this project are documented here. The format follows
 [Semantic Versioning](https://semver.org/). The section matching `mod.version` in
 `stonecutter.properties.toml` is used as the Modrinth/CurseForge changelog.
 
+## [1.1.1]
+
+### Fixed
+- Bone Skewers could not be enchanted on Minecraft 1.21 and newer (they now count as swords for
+  Sharpness, Smite, Looting, Fire Aspect, Sweeping Edge, Unbreaking, Mending and Curse of
+  Vanishing).
+
+### Changed
+- Higher resolution mod icon.
+- Now also published on Modrinth.
+
 ## [1.1.0]
 
 ### Added
