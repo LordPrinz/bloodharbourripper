@@ -1,27 +1,33 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
+# gradle
+.gradle/
+build/
+out/
+classes/
+.kotlin/
 
 # idea
-out
+.idea/
+*.iml
 *.ipr
 *.iws
-*.iml
-.idea/*
-!.idea/scopes
 
-# gradle
-build
-.gradle
+# eclipse / vscode
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+*.launch
 
-# other
-eclipse
-run
-run-data
+# runtime
+run/
+versions/*/run/
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+
+# os
 .DS_Store
 
 # oh-my-claudecode state
