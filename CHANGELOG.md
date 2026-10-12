@@ -12,6 +12,9 @@ All notable changes to this project are documented here. The format follows
   appeared), and Bone Skewer hits did not pull other players. The new velocity was not sent to
   the affected player's own client.
 
+### Changed
+- Shorter item tooltips, split into a few lines instead of one very wide line.
+
 ## [1.1.1]
 
 ### Fixed
