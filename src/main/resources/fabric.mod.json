@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": ["${authors}"],
+  "license": "${license}",
+  "icon": "assets/${id}/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["net.lordprinz.bloodharbourripper.platform.fabric.FabricEntrypoint"],
+    "client": ["net.lordprinz.bloodharbourripper.platform.fabric.FabricClientEntrypoint"]
+  },
+  "mixins": ["${id}.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.15",
+    "fabric-api": "*",
+    "minecraft": "${minecraft}",
+    "java": ">=${java}"
+  }
+}

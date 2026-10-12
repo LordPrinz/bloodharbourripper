@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",${refmap}
+  "package": "net.lordprinz.bloodharbourripper.mixin",
+  "compatibilityLevel": "${mixin_java}",
+  "mixins": [
+    "LivingEntityInvoker"
+  ],
+  "client": [
+    "client.MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
