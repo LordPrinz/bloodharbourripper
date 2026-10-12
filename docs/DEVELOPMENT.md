@@ -134,8 +134,9 @@ One-time setup:
 
 1. Create the projects on Modrinth and CurseForge and put their ids into
    `publish.modrinth_id` / `publish.curseforge_id` in `stonecutter.properties.toml`.
-2. Create API tokens and add them as GitHub repository secrets `MODRINTH_TOKEN` and
-   `CURSEFORGE_TOKEN`.
+2. Create API tokens and add them as GitHub repository secrets `MODRINTH_TOKEN` (scopes: Create,
+   Read and Write versions, Read projects) and `CURSEFORGE_TOKEN` (an upload token from
+   legacy.curseforge.com/account/api-tokens, not a Core API key).
 
 Every release:
 
@@ -147,3 +148,5 @@ Every release:
    release with all jars.
 
 Locally, `./gradlew publishMods` without tokens performs a dry run.
+
+Store page texts live in `docs/listing/description.md` (Modrinth and CurseForge both use it).

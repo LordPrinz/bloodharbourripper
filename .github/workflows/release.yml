@@ -41,6 +41,24 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
 
+      # Modrinth requires an "environment" on every version; mod-publish-plugin does not set it yet.
+      # Needs the MODRINTH_TOKEN scopes: Create versions, Read versions, Write versions, Read projects.
+      - name: Set Modrinth environment (client and server)
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          project=$(sed -n 's/^publish.modrinth_id = "\(.*\)"/\1/p' stonecutter.properties.toml)
+          [ -z "$project" ] && exit 0
+          version="${GITHUB_REF_NAME#v}"
+          ids=$(curl -sf -H "Authorization: $MODRINTH_TOKEN" "https://api.modrinth.com/v2/project/$project/version" \
+            | jq -r --arg v "$version+" '.[] | select(.version_number | startswith($v)) | select(.environment != "client_and_server") | .id')
+          for id in $ids; do
+            curl -sf -X PATCH -H "Authorization: $MODRINTH_TOKEN" -H "Content-Type: application/json" \
+              -d '{"environment":"client_and_server"}' "https://api.modrinth.com/v3/version/$id"
+            echo "environment set for $id"
+          done
+
       - name: Attach jars to the GitHub release
         if: startsWith(github.ref, 'refs/tags/v')
         env:
