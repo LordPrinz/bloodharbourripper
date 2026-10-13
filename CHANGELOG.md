@@ -5,6 +5,13 @@ All notable changes to this project are documented here. The format follows
 [Semantic Versioning](https://semver.org/). The section matching `mod.version` in
 `stonecutter.properties.toml` is used as the Modrinth/CurseForge changelog.
 
+## [1.1.3]
+
+### Changed
+- The source code is now public: https://github.com/LordPrinz/bloodharbourripper. Report bugs in
+  its issue tracker.
+- The mod list in game links to the mod page, the source code and the issue tracker.
+
 ## [1.1.2]
 
 ### Fixed

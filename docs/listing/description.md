@@ -122,7 +122,7 @@ advancement **"Sink them all!"**.
 
 **Can I rebind the abilities?** Yes, in *Options → Controls → Blood Harbour Ripper*.
 
-**Found a bug?** Please report it in the comments with your Minecraft version, loader and the log.
+**Found a bug?** Please report it on the [issue tracker](https://github.com/LordPrinz/bloodharbourripper/issues) with your Minecraft version, loader and the log. The source code is on [GitHub](https://github.com/LordPrinz/bloodharbourripper).
 
 ---
 

@@ -3,7 +3,7 @@
 A dark, sea-themed weapon mod: throwable Bone Skewers, executions and the Phantom Undertow dash.
 Inspired by Pyke, the Bloodharbor Ripper.
 
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-bloodharbour-ripper) · [Modrinth](https://modrinth.com/mod/the-bloodharbour-ripper)
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-bloodharbour-ripper) · [Modrinth](https://modrinth.com/mod/the-bloodharbour-ripper) · [Issues](https://github.com/LordPrinz/bloodharbourripper/issues)
 
 ## Supported versions
 

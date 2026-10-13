@@ -75,6 +75,8 @@ tasks.processResources {
         "authors" to prop("mod.authors"),
         "license" to prop("mod.license"),
         "description" to prop("mod.description"),
+        "sources" to prop("mod.sources"),
+        "homepage" to prop("mod.homepage"),
         "minecraft" to prop("mod.mc_compat"),
         "java" to javaVersion.toString(),
         "mixin_java" to "JAVA_$javaVersion",
