@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " T ",
+    "CHC",
+    " W "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:trident"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "W": {
+      "item": "minecraft:wither_rose"
+    }
+  },
+  "result": {
+    "item": "bloodharbourripper:drowned_heart",
+    "count": 1
+  },
+  "show_notification": true
+}

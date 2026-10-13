@@ -5,9 +5,20 @@ All notable changes to this project are documented here. The format follows
 [Semantic Versioning](https://semver.org/). The section matching `mod.version` in
 `stonecutter.properties.toml` is used as the Modrinth/CurseForge changelog.
 
-## [1.1.3]
+## [1.2.0]
+
+### Added
+- Four crafting components: Harpoon Head, Bound Haft, Abyssal Core and Drowned Heart.
 
 ### Changed
+- Deeper crafting progression. Existing skewers in worlds are not affected.
+  - Bone Skewer Skeleton: Harpoon Head + Bound Haft + Bone Block (Crafting Table).
+  - Bone Skewer Raw: Jaull Fish Vial + Skeleton + Abyssal Core (Smithing Table).
+  - Bone Skewer: Jaull Fish Vial + Raw + Drowned Heart (Smithing Table).
+  - Harpoon Head: 4 Prismarine Shards, Nautilus Shell, Iron Ingot.
+  - Bound Haft: 2 Bone Blocks, 2 String, Kelp.
+  - Abyssal Core: 4 Echo Shards, Sculk Catalyst, 4 Prismarine Crystals.
+  - Drowned Heart: Heart of the Sea, Trident, 2 Prismarine Crystals, Wither Rose.
 - The source code is now public: https://github.com/LordPrinz/bloodharbourripper. Report bugs in
   its issue tracker.
 - The mod list in game links to the mod page, the source code and the issue tracker.

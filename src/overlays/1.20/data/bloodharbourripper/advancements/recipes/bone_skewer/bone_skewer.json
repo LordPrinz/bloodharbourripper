@@ -13,13 +13,13 @@
         ]
       }
     },
-    "has_bone_skewer_raw": {
+    "has_drowned_heart": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "bloodharbourripper:bone_skewer_raw"
+              "bloodharbourripper:drowned_heart"
             ]
           }
         ]
@@ -35,7 +35,7 @@
   "requirements": [
     [
       "has_jaull_fish_vial",
-      "has_bone_skewer_raw",
+      "has_drowned_heart",
       "has_the_recipe"
     ]
   ],

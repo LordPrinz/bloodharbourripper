@@ -13,13 +13,13 @@
         ]
       }
     },
-    "has_bone_skewer_skeleton": {
+    "has_abyssal_core": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "bloodharbourripper:bone_skewer_skeleton"
+              "bloodharbourripper:abyssal_core"
             ]
           }
         ]
@@ -35,7 +35,7 @@
   "requirements": [
     [
       "has_jaull_fish_vial",
-      "has_bone_skewer_skeleton",
+      "has_abyssal_core",
       "has_the_recipe"
     ]
   ],

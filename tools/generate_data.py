@@ -21,28 +21,63 @@ ERAS = {
 }
 
 RECIPES = {
-    # Tier 1 — a bone harpoon with a prismarine head, bound around a nautilus shell.
+    # --- Components -------------------------------------------------------------------------------
+    # A prismarine harpoon head around a nautilus shell, set on an iron socket.
+    "harpoon_head": {
+        "type": "shaped",
+        "category": "misc",
+        "pattern": [" P ", "PNP", " I "],
+        "key": {"P": "minecraft:prismarine_shard", "N": "minecraft:nautilus_shell", "I": "minecraft:iron_ingot"},
+        "unlocked_by": ["minecraft:nautilus_shell", "minecraft:prismarine_shard"],
+    },
+    # Bone blocks lashed together with string around a strand of kelp.
+    "bound_haft": {
+        "type": "shaped",
+        "category": "misc",
+        "pattern": ["S B", " K ", "B S"],
+        "key": {"S": "minecraft:string", "B": "minecraft:bone_block", "K": "minecraft:kelp"},
+        "unlocked_by": ["minecraft:bone_block", "minecraft:kelp"],
+    },
+    # Echo shards bound around a sculk catalyst, sealed with prismarine crystals.
+    "abyssal_core": {
+        "type": "shaped",
+        "category": "misc",
+        "pattern": ["CEC", "EXE", "CEC"],
+        "key": {"C": "minecraft:prismarine_crystals", "E": "minecraft:echo_shard", "X": "minecraft:sculk_catalyst"},
+        "unlocked_by": ["minecraft:echo_shard", "minecraft:sculk_catalyst"],
+    },
+    # A Heart of the Sea crowned with a trident and fed by a wither rose.
+    "drowned_heart": {
+        "type": "shaped",
+        "category": "misc",
+        "pattern": [" T ", "CHC", " W "],
+        "key": {"T": "minecraft:trident", "C": "minecraft:prismarine_crystals",
+                "H": "minecraft:heart_of_the_sea", "W": "minecraft:wither_rose"},
+        "unlocked_by": ["minecraft:heart_of_the_sea", "minecraft:trident"],
+    },
+    # --- Skewers ----------------------------------------------------------------------------------
+    # Tier 1 — the head and the haft joined over a bone block pommel.
     "bone_skewer_skeleton": {
         "type": "shaped",
-        "pattern": [" PP", " NP", "B  "],
-        "key": {"P": "minecraft:prismarine_shard", "N": "minecraft:nautilus_shell", "B": "minecraft:bone"},
-        "unlocked_by": ["minecraft:nautilus_shell", "minecraft:prismarine_shard"],
+        "pattern": ["  H", " F ", "B  "],
+        "key": {"H": f"{NS}:harpoon_head", "F": f"{NS}:bound_haft", "B": "minecraft:bone_block"},
+        "unlocked_by": [f"{NS}:harpoon_head", f"{NS}:bound_haft"],
     },
     # Tier 2 — smithing upgrade (keeps enchantments and durability).
     "bone_skewer_raw": {
         "type": "smithing",
         "template": f"{NS}:jaull_fish_vial",
         "base": f"{NS}:bone_skewer_skeleton",
-        "addition": "minecraft:echo_shard",
-        "unlocked_by": [f"{NS}:jaull_fish_vial", f"{NS}:bone_skewer_skeleton"],
+        "addition": f"{NS}:abyssal_core",
+        "unlocked_by": [f"{NS}:jaull_fish_vial", f"{NS}:abyssal_core"],
     },
     # Tier 3 — the Bloodharbor Ripper's own harpoon.
     "bone_skewer": {
         "type": "smithing",
         "template": f"{NS}:jaull_fish_vial",
         "base": f"{NS}:bone_skewer_raw",
-        "addition": "minecraft:heart_of_the_sea",
-        "unlocked_by": [f"{NS}:jaull_fish_vial", f"{NS}:bone_skewer_raw"],
+        "addition": f"{NS}:drowned_heart",
+        "unlocked_by": [f"{NS}:jaull_fish_vial", f"{NS}:drowned_heart"],
     },
 }
 
@@ -61,15 +96,17 @@ def item_predicate(item, era):
 
 def recipe_json(name, spec, era):
     if spec["type"] == "shaped":
-        return {
+        recipe = {
             "type": "minecraft:crafting_shaped",
-            "category": "equipment",
-            "group": "bone_skewer",
+            "category": spec.get("category", "equipment"),
             "pattern": spec["pattern"],
             "key": {k: ingredient(v, era) for k, v in spec["key"].items()},
             "result": result(f"{NS}:{name}", era),
             "show_notification": True,
         }
+        if spec.get("category", "equipment") == "equipment":
+            recipe["group"] = "bone_skewer"
+        return recipe
     return {
         "type": "minecraft:smithing_transform",
         "template": ingredient(spec["template"], era),

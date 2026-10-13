@@ -17,6 +17,10 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.BONE_SKEWER_RAW.get());
                         output.accept(ModItems.BONE_SKEWER.get());
                         output.accept(ModItems.JAULL_FISH_VIAL.get());
+                        output.accept(ModItems.HARPOON_HEAD.get());
+                        output.accept(ModItems.BOUND_HAFT.get());
+                        output.accept(ModItems.ABYSSAL_CORE.get());
+                        output.accept(ModItems.DROWNED_HEART.get());
                     })
                     .build());
 

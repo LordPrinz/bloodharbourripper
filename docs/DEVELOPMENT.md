@@ -86,6 +86,7 @@ Rules of thumb:
 Compatibility contracts that must never break:
 
 - **Registry ids** (`bone_skewer`, `bone_skewer_raw`, `bone_skewer_skeleton`, `jaull_fish_vial`,
+  `harpoon_head`, `bound_haft`, `abyssal_core`, `drowned_heart`,
   `dash_phantom`, `execute_marker`, the sound ids) are stored in worlds. Never rename or remove them;
   add new ones instead.
 - **Saved data keys** (`DealtDamage`, …) must keep their name and meaning.

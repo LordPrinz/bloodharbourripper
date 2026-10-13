@@ -2,7 +2,7 @@
   "type": "minecraft:smithing_transform",
   "template": "bloodharbourripper:jaull_fish_vial",
   "base": "bloodharbourripper:bone_skewer_skeleton",
-  "addition": "minecraft:echo_shard",
+  "addition": "bloodharbourripper:abyssal_core",
   "result": {
     "id": "bloodharbourripper:bone_skewer_raw",
     "count": 1

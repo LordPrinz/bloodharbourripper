@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S B",
+    " K ",
+    "B S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "K": {
+      "item": "minecraft:kelp"
+    }
+  },
+  "result": {
+    "item": "bloodharbourripper:bound_haft",
+    "count": 1
+  },
+  "show_notification": true
+}

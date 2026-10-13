@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_heart_of_the_sea": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:heart_of_the_sea"
+          }
+        ]
+      }
+    },
+    "has_trident": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:trident"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bloodharbourripper:drowned_heart"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heart_of_the_sea",
+      "has_trident",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bloodharbourripper:drowned_heart"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "PNP",
+    " I "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "bloodharbourripper:harpoon_head",
+    "count": 1
+  },
+  "show_notification": true
+}

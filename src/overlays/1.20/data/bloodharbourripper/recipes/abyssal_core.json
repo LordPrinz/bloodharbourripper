@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CEC",
+    "EXE",
+    "CEC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "X": {
+      "item": "minecraft:sculk_catalyst"
+    }
+  },
+  "result": {
+    "item": "bloodharbourripper:abyssal_core",
+    "count": 1
+  },
+  "show_notification": true
+}

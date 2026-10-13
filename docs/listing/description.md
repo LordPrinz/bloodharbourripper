@@ -19,6 +19,7 @@ frozen in your wake.
 | 💀 | **Death From Below** | Execute a marked enemy under 33% health for double loot and XP. |
 | 👻 | **Phantom Undertow** | Dash forward while your afterimage blinds and freezes everything behind you. |
 | 🐟 | **Jaull Fish Vial** | A rare relic from the Ancient City — the key to awakening your harpoon. |
+| 🧩 | **Crafting components** | Build every skewer piece by piece: heads, hafts, abyssal cores and drowned hearts. |
 | ⚒️ | **Smithing upgrades** | Upgrade tiers at the Smithing Table without losing enchantments. |
 
 ---
@@ -78,21 +79,30 @@ template that awakens the Bone Skewer — you will need one for each upgrade.
 
 ## ⚒️ Crafting & progression
 
+Every skewer is assembled from components, crafted at a *Crafting Table*:
+
+| Component | Recipe |
+|---|---|
+| **Harpoon Head** | 4 Prismarine Shards around a Nautilus Shell, on an Iron Ingot |
+| **Bound Haft** | 2 Bone Blocks and 2 String lashed around Kelp |
+| **Abyssal Core** | 4 Echo Shards around a Sculk Catalyst, 4 Prismarine Crystals in the corners |
+| **Drowned Heart** | Heart of the Sea crowned with a Trident, 2 Prismarine Crystals at its sides, a Wither Rose below |
+
 **1. Bone Skewer Skeleton** — *Crafting Table*
 
 ```
- ·  P  P        P = Prismarine Shard
- ·  N  P        N = Nautilus Shell
- B  ·  ·        B = Bone
+ ·  ·  H        H = Harpoon Head
+ ·  F  ·        F = Bound Haft
+ B  ·  ·        B = Bone Block
 ```
 
 **2. Bone Skewer Raw** — *Smithing Table*
 
-`Jaull Fish Vial` + `Bone Skewer Skeleton` + `Echo Shard`
+`Jaull Fish Vial` + `Bone Skewer Skeleton` + `Abyssal Core`
 
 **3. Bone Skewer** — *Smithing Table*
 
-`Jaull Fish Vial` + `Bone Skewer Raw` + `Heart of the Sea`
+`Jaull Fish Vial` + `Bone Skewer Raw` + `Drowned Heart`
 
 Smithing upgrades **keep enchantments, custom names and durability**. Recipes unlock in the recipe
 book as soon as you pick up an ingredient. Obtain the final Bone Skewer to earn the challenge

@@ -7,7 +7,7 @@
     "item": "bloodharbourripper:bone_skewer_raw"
   },
   "addition": {
-    "item": "minecraft:heart_of_the_sea"
+    "item": "bloodharbourripper:drowned_heart"
   },
   "result": {
     "item": "bloodharbourripper:bone_skewer",

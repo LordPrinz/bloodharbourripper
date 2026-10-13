@@ -2,7 +2,7 @@
   "type": "minecraft:smithing_transform",
   "template": "bloodharbourripper:jaull_fish_vial",
   "base": "bloodharbourripper:bone_skewer_raw",
-  "addition": "minecraft:heart_of_the_sea",
+  "addition": "bloodharbourripper:drowned_heart",
   "result": {
     "id": "bloodharbourripper:bone_skewer",
     "count": 1

@@ -7,7 +7,7 @@
     "item": "bloodharbourripper:bone_skewer_skeleton"
   },
   "addition": {
-    "item": "minecraft:echo_shard"
+    "item": "bloodharbourripper:abyssal_core"
   },
   "result": {
     "id": "bloodharbourripper:bone_skewer_raw",

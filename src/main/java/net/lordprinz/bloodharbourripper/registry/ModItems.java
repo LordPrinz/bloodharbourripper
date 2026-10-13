@@ -27,6 +27,12 @@ public final class ModItems {
             properties -> new BoneSkewerItem(SkewerTier.ADVANCED, properties));
     public static final Supplier<TooltipItem> JAULL_FISH_VIAL = register("jaull_fish_vial", TooltipItem::new);
 
+    // Crafting components
+    public static final Supplier<TooltipItem> HARPOON_HEAD = register("harpoon_head", TooltipItem::new);
+    public static final Supplier<TooltipItem> BOUND_HAFT = register("bound_haft", TooltipItem::new);
+    public static final Supplier<TooltipItem> ABYSSAL_CORE = register("abyssal_core", TooltipItem::new);
+    public static final Supplier<TooltipItem> DROWNED_HEART = register("drowned_heart", TooltipItem::new);
+
     private ModItems() {}
 
     private static <T extends Item> Supplier<T> register(String name, Function<Item.Properties, T> factory) {

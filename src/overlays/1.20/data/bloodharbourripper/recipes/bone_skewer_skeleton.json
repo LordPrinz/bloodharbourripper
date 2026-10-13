@@ -1,26 +1,26 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "group": "bone_skewer",
   "pattern": [
-    " PP",
-    " NP",
+    "  H",
+    " F ",
     "B  "
   ],
   "key": {
-    "P": {
-      "item": "minecraft:prismarine_shard"
+    "H": {
+      "item": "bloodharbourripper:harpoon_head"
     },
-    "N": {
-      "item": "minecraft:nautilus_shell"
+    "F": {
+      "item": "bloodharbourripper:bound_haft"
     },
     "B": {
-      "item": "minecraft:bone"
+      "item": "minecraft:bone_block"
     }
   },
   "result": {
     "item": "bloodharbourripper:bone_skewer_skeleton",
     "count": 1
   },
-  "show_notification": true
+  "show_notification": true,
+  "group": "bone_skewer"
 }

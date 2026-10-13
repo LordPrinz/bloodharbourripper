@@ -1,22 +1,22 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nautilus_shell": {
+    "has_harpoon_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "minecraft:nautilus_shell"
+            "items": "bloodharbourripper:harpoon_head"
           }
         ]
       }
     },
-    "has_prismarine_shard": {
+    "has_bound_haft": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "minecraft:prismarine_shard"
+            "items": "bloodharbourripper:bound_haft"
           }
         ]
       }
@@ -30,8 +30,8 @@
   },
   "requirements": [
     [
-      "has_nautilus_shell",
-      "has_prismarine_shard",
+      "has_harpoon_head",
+      "has_bound_haft",
       "has_the_recipe"
     ]
   ],
